@@ -1,0 +1,27 @@
+﻿<Window x:Class="AppLauncher_WPF.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppLauncher_WPF"
+        mc:Ignorable="d"
+        Title="App列表" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True">
+    <Grid>
+        <ListBox x:Name="Lb_Apps" HorizontalAlignment="Left" Height="301" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Stretch" Margin="10,10,0,0" SelectionChanged="Lb_Apps_SelectionChanged"/>
+        <Button Content="添加" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>
+        <Button Content="删除" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="DelItem"/>
+        <GroupBox x:Name="Gb" Header="编辑" HorizontalAlignment="Left" Height="272" Margin="135,39,0,0" VerticalAlignment="Top" Width="349">
+            <Grid HorizontalAlignment="Left" Height="235" VerticalAlignment="Top" Width="320" Margin="10,10,0,0">
+                <Label Content="程序名：" HorizontalAlignment="Left" Margin="0,45,0,0" VerticalAlignment="Top"/>
+                <Label Content="路径：" HorizontalAlignment="Left" Margin="12,75,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="Tb_AppName" HorizontalAlignment="Left" Height="23" Margin="58,46,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="224" VerticalContentAlignment="Center" KeyDown="Tb_KeyDown"/>
+                <TextBox x:Name="Tb_AppPath" HorizontalAlignment="Left" Height="23" Margin="58,74,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="224" VerticalContentAlignment="Center" KeyDown="Tb_KeyDown"/>
+                <Button Content="..." HorizontalAlignment="Left" Margin="287,74,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="Browse"/>
+                <Button Content="修改此项" HorizontalAlignment="Left" Margin="207,110,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Change"/>
+                <Button Content="↑" HorizontalAlignment="Left" Margin="0,210,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="Up"/>
+                <Button Content="↓" HorizontalAlignment="Left" Margin="30,210,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="Down"/>
+                <Label Content="【提示】关闭此窗口后所作修改即可生效" HorizontalAlignment="Left" Margin="84,210,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="AppLauncher_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppLauncher_WPF"
+        mc:Ignorable="d"
+        Title="AppLauncher" Height="450" Width="800" Closing="Window_Closing" SizeChanged="Window_SizeChanged" MinWidth="300" MinHeight="300">
+    <Grid Name="MainGrid">
+        <Menu Height="22" Background="White" VerticalAlignment="Top">
+            <MenuItem Header="选项" Height="22">
+                <MenuItem Header="编辑App列表" Click="EditItems"/>
+            </MenuItem>
+            <MenuItem Header="帮助" Height="22">
+                <MenuItem Header="关于" Click="About"/>
+            </MenuItem>
+        </Menu>
+        <ScrollViewer Name="Scroll" VerticalScrollBarVisibility="Auto" Margin="0,22,0,0">
+            <WrapPanel x:Name="Table" HorizontalAlignment="Center" Width="768" VerticalAlignment="Top" Height="200">
+                <WrapPanel.Resources>
+                    <Style TargetType="{x:Type local:Item}">
+                        <Setter Property="Margin" Value="5,5" />
+                    </Style>
+                </WrapPanel.Resources>
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

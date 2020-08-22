@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="AppLauncher_WPF.Item"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppLauncher_WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="250" MinWidth="250" MinHeight="100" MaxWidth="250" MaxHeight="100" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Border CornerRadius="8" Background="White" BorderBrush="#FFE6E6E6" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="24*"/>
+                <RowDefinition Height="25*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="Image_AppIcon" Height="64" Width="64" Margin="13,17,171,17" Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="None"/>
+            <Label x:Name="Label_AppName" Content="AppName" Margin="82,10,13,3" FontSize="18" Grid.ColumnSpan="2"/>
+            <Label x:Name="Label_FileName" Content="FileName" Margin="82,35,13,37" Foreground="Gray" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <Button x:Name="Button_Start" Content="启动" Margin="85,19,103,12" Click="Start_Click" BorderBrush="LightGray" Background="#FFF3F3F3" Grid.Row="1" Grid.ColumnSpan="2"/>
+        </Grid>
+    </Border>
+</UserControl>
