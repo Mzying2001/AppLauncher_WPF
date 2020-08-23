@@ -32,24 +32,41 @@ namespace App
             if (!Directory.Exists(path_appconf))
                 throw new Exception($"找不到路径\"{path_appconf}\"");
 
+            /*这个List保存每个在AppList中的Appconf路径，这些文件不会被删除（会自动删除AppList中没有的项）*/
+            List<string> acpaths = new List<string>();
+
             /*添加项*/
             foreach (string confName in File.ReadAllText(path_applist).Split('\n'))
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(confName))
-                        continue;
+                    string acpath = $"{path_appconf}{confName}.appconf";
 
-                    Add(new Appconf($"{path_appconf}{confName}.appconf"));
+                    Add(new Appconf(acpath));
+                    acpaths.Add(acpath);
                 }
                 catch (Exception)
                 {
                     continue;
                 }
             }
+
+            /*删除AppList中没有的appconf*/
+            foreach (string file in Directory.GetFiles(path_appconf))
+            {
+                if (!acpaths.Contains(file))
+                {
+                    File.Delete(file);
+                }
+            }
         }
 
-        ~AppList()
+        public new Appconf this[int index] => base[index];
+
+        /// <summary>
+        /// 保存AppList
+        /// </summary>
+        public void Save()
         {
             string list = null;
 
@@ -59,23 +76,7 @@ namespace App
             }
 
             File.WriteAllText(path_applist, list);
-
-            /*删除AppList中没有的appconf*/
-            List<string> protect = new List<string>();
-            foreach (Appconf a in this)
-            {
-                protect.Add(a.Path);
-            }
-            foreach (string file in Directory.GetFiles(path_appconf))
-            {
-                if (!protect.Contains(file))
-                {
-                    File.Delete(file);
-                }
-            }
         }
-
-        public new Appconf this[int index] => base[index];
 
         /// <summary>
         /// 添加App

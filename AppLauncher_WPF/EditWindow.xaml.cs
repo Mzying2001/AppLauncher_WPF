@@ -40,6 +40,8 @@ namespace AppLauncher_WPF
             Lb_Apps_SelectionChanged(null, null);
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => AL.Save();
+
         public new AppList ShowDialog()
         {
             base.ShowDialog();
