@@ -131,7 +131,7 @@ namespace AppLauncher_WPF
                 Tb_AppPath.Text = Tb_AppPath.Text.Trim().Replace('/', '\\');
 
                 if (!File.Exists(Tb_AppPath.Text))
-                    throw new Exception($"路径\"{Tb_AppPath}\"不存在");
+                    throw new Exception($"路径\"{Tb_AppPath.Text}\"不存在");
 
                 if (!(Tb_AppPath.Text.EndsWith(".exe") || Tb_AppPath.Text.EndsWith(".EXE")))
                     throw new Exception($"路径\"{Tb_AppPath.Text}\"所指向的文件不是应用程序");
