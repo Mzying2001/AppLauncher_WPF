@@ -197,10 +197,12 @@ namespace AppLauncher_WPF
         private void Tb_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
+            {
                 Change(null, null);
 
-            TextBox tb = (TextBox)sender;
-            tb.Select(tb.Text.Length, 0);
+                TextBox tb = (TextBox)sender;
+                tb.Select(tb.Text.Length, 0);
+            }
         }
     }
 }
