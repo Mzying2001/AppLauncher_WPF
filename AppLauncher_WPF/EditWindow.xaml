@@ -8,8 +8,8 @@
         Title="App列表" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True">
     <Grid>
         <ListBox x:Name="Lb_Apps" HorizontalAlignment="Left" Height="301" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Stretch" Margin="10,10,0,0" SelectionChanged="Lb_Apps_SelectionChanged"/>
-        <Button Content="添加" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>
-        <Button Content="删除" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="DelItem"/>
+        <Button x:Name="B_Add" Content="添加" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>
+        <Button x:Name="B_Del" Content="删除" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="DelItem"/>
         <GroupBox x:Name="Gb" Header="编辑" HorizontalAlignment="Left" Height="272" Margin="135,39,0,0" VerticalAlignment="Top" Width="349">
             <Grid HorizontalAlignment="Left" Height="235" VerticalAlignment="Top" Width="320" Margin="10,10,0,0">
                 <Label Content="程序名：" HorizontalAlignment="Left" Margin="0,45,0,0" VerticalAlignment="Top"/>

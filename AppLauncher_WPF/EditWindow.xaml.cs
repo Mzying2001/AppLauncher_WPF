@@ -52,12 +52,14 @@ namespace AppLauncher_WPF
             if (index >= 0 && index < AL.Count)
             {
                 Gb.IsEnabled = true;
+                B_Del.IsEnabled = true;
                 Tb_AppName.Text = AL[index].AppName;
                 Tb_AppPath.Text = AL[index].AppPath;
             }
             else
             {
                 Gb.IsEnabled = false;
+                B_Del.IsEnabled = false;
                 Tb_AppName.Text = "NULL";
                 Tb_AppPath.Text = "NULL";
             }
