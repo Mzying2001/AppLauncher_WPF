@@ -172,8 +172,9 @@ namespace AppLauncher_WPF
             conf.wc.Width  = Width;
             conf.wc.Height = Height;
 
-            /*保存当前语言*/
+            /*保存当前配置*/
             conf.alc.Language = CurrentLanguage;
+            conf.alc.WindowTopmost = Topmost;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -276,8 +277,7 @@ namespace AppLauncher_WPF
         /// </summary>
         private void WindowTopmost_Click(object sender, RoutedEventArgs e)
         {
-            Topmost = !conf.alc.WindowTopmost;
-            conf.alc.WindowTopmost = Topmost;
+            Topmost = !Topmost;
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace AppLauncher_WPF
         private void MenuItem_Options_SubmenuOpened(object sender, RoutedEventArgs e)
         {
             MinAfterLaunch.IsChecked = conf.alc.MinAfterLaunch;
-            WindowTopmost.IsChecked = conf.alc.WindowTopmost;
+            WindowTopmost.IsChecked = Topmost;
         }
     }
 }
