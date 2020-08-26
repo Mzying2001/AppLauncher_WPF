@@ -20,5 +20,15 @@
     <sys:String x:Key="EditWindow_Label_AppPath">路径：</sys:String>
     <sys:String x:Key="EditWindow_Button_Change">修改此项</sys:String>
     <sys:String x:Key="EditWindow_Label_Tips">【提示】关闭此窗口后所作修改即可生效</sys:String>
+    <sys:String x:Key="EditWindow_Filter_App">应用程序</sys:String>
+    <sys:String x:Key="EditWindow_Message_PathInexist">路径“{0}”不存在</sys:String>
+    <sys:String x:Key="EditWindow_Message_NoApplication">路径“{0}”所指向的文件不是应用程序</sys:String>
+    <sys:String x:Key="EditWindow_Message_AppNameIsEmpty">程序名不能为空</sys:String>
+    <sys:String x:Key="EditWindow_Message_AreYouSureToRemove">是否删除“{0}”？</sys:String>
+
+    <sys:String x:Key="MessageBoxTitle_About">关于</sys:String>
+    <sys:String x:Key="MessageBoxTitle_Error">错误</sys:String>
+    <sys:String x:Key="MessageBoxTitle_Message">信息</sys:String>
+    <sys:String x:Key="MessageBoxTitle_WindowConfError">窗口配置错误</sys:String>
     
 </ResourceDictionary>

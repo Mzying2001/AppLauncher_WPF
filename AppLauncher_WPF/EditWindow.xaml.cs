@@ -73,7 +73,7 @@ namespace AppLauncher_WPF
             {
                 OpenFileDialog ofd = new OpenFileDialog()
                 {
-                    Filter = "应用程序|*.exe",
+                    Filter = $"{FindResource("EditWindow_Filter_App")}|*.exe"
                 };
                 if (ofd.ShowDialog() == true)
                 {
@@ -88,16 +88,22 @@ namespace AppLauncher_WPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "错误");
+                MessageBox.Show(ex.Message, FindResource("MessageBoxTitle_Error") as string);
             }
         }
 
-        private void DelItem(object sender, RoutedEventArgs e)
+        private void RemoveItem(object sender, RoutedEventArgs e)
         {
             try
             {
                 int index = Lb_Apps.SelectedIndex;
-                if (MessageBox.Show($"是否删除\"{AL[index].AppName}\"？", "提示", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (
+                    MessageBox.Show(
+                        string.Format(FindResource("EditWindow_Message_AreYouSureToRemove") as string, AL[index].AppName),
+                        FindResource("MessageBoxTitle_Message") as string,
+                        MessageBoxButton.YesNo
+                    ) == MessageBoxResult.Yes
+                    )
                 {
                     Lb_Apps.Items.RemoveAt(index);
                     AL.RemoveAt(index);
@@ -111,7 +117,7 @@ namespace AppLauncher_WPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "错误");
+                MessageBox.Show(ex.Message, FindResource("MessageBoxTitle_Error") as string);
             }
         }
 
@@ -119,7 +125,7 @@ namespace AppLauncher_WPF
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
-                Filter = "应用程序|*.exe"
+                Filter = $"{FindResource("EditWindow_Filter_App")}|*.exe"
             };
             if (ofd.ShowDialog() == true)
             {
@@ -134,14 +140,14 @@ namespace AppLauncher_WPF
                 Tb_AppName.Text = Tb_AppName.Text.Trim();
                 Tb_AppPath.Text = Tb_AppPath.Text.Trim().Replace('/', '\\');
 
+                if (string.IsNullOrEmpty(Tb_AppName.Text))
+                    throw new Exception(FindResource("EditWindow_Message_AppNameIsEmpty") as string);
+
                 if (!File.Exists(Tb_AppPath.Text))
-                    throw new Exception($"路径\"{Tb_AppPath.Text}\"不存在");
+                    throw new Exception(string.Format(FindResource("EditWindow_Message_PathInexist") as string, Tb_AppPath.Text));
 
                 if (!(Tb_AppPath.Text.EndsWith(".exe") || Tb_AppPath.Text.EndsWith(".EXE")))
-                    throw new Exception($"路径\"{Tb_AppPath.Text}\"所指向的文件不是应用程序");
-
-                if (string.IsNullOrEmpty(Tb_AppName.Text))
-                    throw new Exception("程序名不能为空");
+                    throw new Exception(string.Format(FindResource("EditWindow_Message_NoApplication") as string, Tb_AppPath.Text));
 
                 int index = Lb_Apps.SelectedIndex;
                 AL[index].AppName = Tb_AppName.Text;
@@ -152,7 +158,7 @@ namespace AppLauncher_WPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "错误");
+                MessageBox.Show(ex.Message, FindResource("MessageBoxTitle_Error") as string);
             }
         }
 

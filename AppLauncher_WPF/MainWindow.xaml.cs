@@ -18,7 +18,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using App;
 using Config;
-using Launcher;
 
 namespace AppLauncher_WPF
 {
@@ -101,7 +100,7 @@ namespace AppLauncher_WPF
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "错误");
+                MessageBox.Show(e.Message, FindResource("MessageBoxTitle_Error") as string);
                 Close();
             }
 
@@ -154,7 +153,7 @@ namespace AppLauncher_WPF
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "窗口配置错误");
+                MessageBox.Show(e.Message, FindResource("MessageBoxTitle_WindowConfError") as string);
             }
         }
 
@@ -217,7 +216,7 @@ namespace AppLauncher_WPF
         {
             DoWithBlurEffect(() =>
             {
-                MessageBox.Show($"AppLauncher v{Application.ResourceAssembly.GetName().Version} by Mzying2001 (颖)", "关于");
+                MessageBox.Show($"AppLauncher v{Application.ResourceAssembly.GetName().Version} by Mzying2001 (颖)", FindResource("MessageBoxTitle_About") as string);
             });
         }
 

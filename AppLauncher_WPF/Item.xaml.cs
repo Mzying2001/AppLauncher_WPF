@@ -41,7 +41,7 @@ namespace AppLauncher_WPF
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "错误");
+                MessageBox.Show(e.Message, FindResource("MessageBoxTitle_Error") as string);
             }
         }
 
