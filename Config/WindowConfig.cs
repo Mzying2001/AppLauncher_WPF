@@ -12,10 +12,7 @@ namespace Config
     /// </summary>
     public class WindowConfig : IniFile
     {
-        public WindowConfig(string path) : base(path)
-        {
-            Path = path;
-        }
+        public WindowConfig(string path) : base(path) { }
 
         /// <summary>
         /// 文件是否存在
@@ -27,10 +24,8 @@ namespace Config
         /// </summary>
         public double X
         {
-            get
-            {
-                return double.Parse(this["WindowStatus", "X"]);
-            }
+            get => double.Parse(this["WindowStatus", "X"]);
+
             set
             {
                 this["WindowStatus", "X"] = value.ToString();
@@ -42,10 +37,8 @@ namespace Config
         /// </summary>
         public double Y
         {
-            get
-            {
-                return double.Parse(this["WindowStatus", "Y"]);
-            }
+            get => double.Parse(this["WindowStatus", "Y"]);
+
             set
             {
                 this["WindowStatus", "Y"] = value.ToString();
@@ -57,10 +50,8 @@ namespace Config
         /// </summary>
         public double Width
         {
-            get
-            {
-                return double.Parse(this["WindowStatus", "Width"]);
-            }
+            get => double.Parse(this["WindowStatus", "Width"]);
+
             set
             {
                 this["WindowStatus", "Width"] = value.ToString();
@@ -72,10 +63,8 @@ namespace Config
         /// </summary>
         public double Height
         {
-            get
-            {
-                return double.Parse(this["WindowStatus", "Height"]);
-            }
+            get => double.Parse(this["WindowStatus", "Height"]);
+
             set
             {
                 this["WindowStatus", "Height"] = value.ToString();

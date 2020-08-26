@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,14 +28,20 @@ namespace AppLauncher_WPF
     public partial class MainWindow : Window
     {
 
+        struct Conf
+        {
+            public AppLauncherConfig alc;
+            public WindowConfig      wc;
+        }
+
         private AppList al;
-        readonly WindowConfig wc;
+        readonly Conf conf;
 
         /*支持切换的语言*/
         readonly string[] supported_language = { "ZH", "EN" };
 
         /*当前语言*/
-        private string current = "ZH";
+        private string current = "ZH"; //默认为中文
         private string CurrentLanguage
         {
             get => current;
@@ -101,20 +108,27 @@ namespace AppLauncher_WPF
             /*载入应用程序*/
             LoadApps();
 
+            /*设置语言*/
+            conf.alc = new AppLauncherConfig(AppDomain.CurrentDomain.BaseDirectory + "Config.ini");
+            if (conf.alc.IsFileExists)
+            {
+                CurrentLanguage = conf.alc.Language;
+            }
+
             try
             {//读取窗口配置
 
-                wc = new WindowConfig(AppDomain.CurrentDomain.BaseDirectory + "Window.ini");
+                conf.wc = new WindowConfig(AppDomain.CurrentDomain.BaseDirectory + "Window.ini");
 
-                if (!wc.IsFileExists)
+                if (!conf.wc.IsFileExists)
                 {
                     return;
                 }
 
-                double x = wc.X; //左边
-                double y = wc.Y; //顶边
-                double w = Math.Abs(wc.Width);  //宽度
-                double h = Math.Abs(wc.Height); //高度
+                double x = conf.wc.X; //左边
+                double y = conf.wc.Y; //顶边
+                double w = Math.Abs(conf.wc.Width);  //宽度
+                double h = Math.Abs(conf.wc.Height); //高度
 
                 /*赋值*/
                 Left   = x;
@@ -143,10 +157,13 @@ namespace AppLauncher_WPF
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             /*保存窗口状态*/
-            wc.X = Left;
-            wc.Y = Top;
-            wc.Width  = Width;
-            wc.Height = Height;
+            conf.wc.X = Left;
+            conf.wc.Y = Top;
+            conf.wc.Width  = Width;
+            conf.wc.Height = Height;
+
+            /*保存当前语言*/
+            conf.alc.Language = CurrentLanguage;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -168,14 +185,25 @@ namespace AppLauncher_WPF
         }
 
         /// <summary>
+        /// 操作时窗口模糊
+        /// </summary>
+        private void DoWithBlurEffect(Action func)
+        {
+            MainGrid.Effect = new BlurEffect() { Radius = 25 };
+            func();
+            MainGrid.Effect = null;
+        }
+
+        /// <summary>
         /// 菜单“编辑App列表”被单击
         /// </summary>
         private void EditItems(object sender, RoutedEventArgs e)
         {
-            MainGrid.Effect = new BlurEffect() { Radius = 25 };
-            al = new EditWindow(al) { Owner = this }.ShowDialog();
-            LoadApps();
-            MainGrid.Effect = null;
+            DoWithBlurEffect(() =>
+            {
+                al = new EditWindow(al) { Owner = this }.ShowDialog();
+                LoadApps();
+            });
         }
 
         /// <summary>
@@ -183,9 +211,10 @@ namespace AppLauncher_WPF
         /// </summary>
         private void About(object sender, RoutedEventArgs e)
         {
-            MainGrid.Effect = new BlurEffect() { Radius = 25 };
-            MessageBox.Show($"AppLauncher v{Application.ResourceAssembly.GetName().Version} by Mzying2001 (颖)", "关于");
-            MainGrid.Effect = null;
+            DoWithBlurEffect(() =>
+            {
+                MessageBox.Show($"AppLauncher v{Application.ResourceAssembly.GetName().Version} by Mzying2001 (颖)", "关于");
+            });
         }
 
         /// <summary>
