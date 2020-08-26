@@ -114,6 +114,10 @@ namespace AppLauncher_WPF
             {
                 CurrentLanguage = conf.alc.Language;
             }
+            else
+            {
+                CurrentLanguage = new SelectLangWindow().ShowDialog();
+            }
 
             try
             {//读取窗口配置

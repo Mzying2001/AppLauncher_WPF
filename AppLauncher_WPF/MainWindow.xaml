@@ -20,7 +20,7 @@
                 <MenuItem Header="{DynamicResource MainWindow_Menu_About}" Click="About"/>
             </MenuItem>
         </Menu>
-        <ScrollViewer Name="Scroll" VerticalScrollBarVisibility="Auto" Margin="0,22,0,0">
+        <ScrollViewer x:Name="Scroll" VerticalScrollBarVisibility="Auto" Margin="0,22,0,0">
             <WrapPanel x:Name="Table" HorizontalAlignment="Center" Width="768" VerticalAlignment="Top" Height="200">
                 <WrapPanel.Resources>
                     <Style TargetType="{x:Type local:Item}">
