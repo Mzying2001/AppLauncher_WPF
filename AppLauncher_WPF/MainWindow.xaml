@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppLauncher_WPF"
         mc:Ignorable="d"
-        Title="AppLauncher" Height="450" Width="800" Closing="Window_Closing" SizeChanged="Window_SizeChanged" MinWidth="300" MinHeight="300">
+        Title="{DynamicResource MainWindow_Title}" Height="450" Width="800" Closing="Window_Closing" SizeChanged="Window_SizeChanged" MinWidth="300" MinHeight="300">
     <Grid Name="MainGrid">
         <Menu Height="22" Background="White" VerticalAlignment="Top">
-            <MenuItem Header="选项" Height="22">
-                <MenuItem Header="编辑App列表" Click="EditItems"/>
+            <MenuItem Header="{DynamicResource MainWindow_Menu_Options}" Height="22">
+                <MenuItem Name="LangSwitch" Header="{DynamicResource MainWindow_Menu_Language}">
+                    <MenuItem Name="LangSwitch_ZH" Header="中文" Click="LangSwitch_ZH_Click" IsChecked="True"/>
+                    <MenuItem Name="LangSwitch_EN" Header="English" Click="LangSwitch_EN_Click"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="{DynamicResource MainWindow_Menu_Edit}" Click="EditItems"/>
             </MenuItem>
-            <MenuItem Header="帮助" Height="22">
-                <MenuItem Header="关于" Click="About"/>
+            <MenuItem Header="{DynamicResource MainWindow_Menu_Help}" Height="22">
+                <MenuItem Header="{DynamicResource MainWindow_Menu_About}" Click="About"/>
             </MenuItem>
         </Menu>
         <ScrollViewer Name="Scroll" VerticalScrollBarVisibility="Auto" Margin="0,22,0,0">

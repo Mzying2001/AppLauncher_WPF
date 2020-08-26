@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AppLauncher_WPF.Language"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <sys:String x:Key="Item_Button_Start">启动</sys:String>
+
+    <sys:String x:Key="MainWindow_Title">App启动器</sys:String>
+    <sys:String x:Key="MainWindow_Menu_Options">选项</sys:String>
+    <sys:String x:Key="MainWindow_Menu_Language">语言</sys:String>
+    <sys:String x:Key="MainWindow_Menu_Edit">编辑App列表</sys:String>
+    <sys:String x:Key="MainWindow_Menu_Help">帮助</sys:String>
+    <sys:String x:Key="MainWindow_Menu_About">关于</sys:String>
+
+    <sys:String x:Key="EditWindow_Title">App列表</sys:String>
+    <sys:String x:Key="EditWindiw_Button_Add">添加</sys:String>
+    <sys:String x:Key="EditWindow_Button_Remove">删除</sys:String>
+    <sys:String x:Key="EditWindow_GroupBoxTitle">编辑</sys:String>
+    <sys:String x:Key="EditWindow_Label_AppName">程序名：</sys:String>
+    <sys:String x:Key="EditWindow_Label_AppPath">路径：</sys:String>
+    <sys:String x:Key="EditWindow_Button_Change">修改此项</sys:String>
+    <sys:String x:Key="EditWindow_Label_Tips">【提示】关闭此窗口后所作修改即可生效</sys:String>
+    
+</ResourceDictionary>

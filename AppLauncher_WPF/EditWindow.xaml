@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppLauncher_WPF"
         mc:Ignorable="d"
-        Title="App列表" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" Closing="Window_Closing">
+        Title="{DynamicResource EditWindow_Title}" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" Closing="Window_Closing">
     <Grid>
         <ListBox x:Name="Lb_Apps" HorizontalAlignment="Left" Height="301" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Stretch" Margin="10,10,0,0" SelectionChanged="Lb_Apps_SelectionChanged"/>
-        <Button x:Name="B_Add" Content="添加" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>
-        <Button x:Name="B_Del" Content="删除" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="DelItem"/>
-        <GroupBox x:Name="Gb" Header="编辑" HorizontalAlignment="Left" Height="272" Margin="135,39,0,0" VerticalAlignment="Top" Width="349">
+        <Button x:Name="B_Add" Content="{DynamicResource EditWindiw_Button_Add}" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>
+        <Button x:Name="B_Del" Content="{DynamicResource EditWindow_Button_Remove}" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="DelItem"/>
+        <GroupBox x:Name="Gb" Header="{DynamicResource EditWindow_GroupBoxTitle}" HorizontalAlignment="Left" Height="272" Margin="135,39,0,0" VerticalAlignment="Top" Width="349">
             <Grid>
-                <Label Content="程序名：" HorizontalAlignment="Left" Margin="17,59,0,0" VerticalAlignment="Top"/>
-                <Label Content="路径：" HorizontalAlignment="Left" Margin="29,89,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="Tb_AppName" HorizontalAlignment="Left" Height="23" Margin="75,60,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="224" VerticalContentAlignment="Center" KeyDown="Tb_KeyDown"/>
-                <TextBox x:Name="Tb_AppPath" HorizontalAlignment="Left" Height="23" Margin="75,88,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="224" VerticalContentAlignment="Center" KeyDown="Tb_KeyDown"/>
+                <Label Content="{DynamicResource EditWindow_Label_AppName}" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="55"/>
+                <Label Content="{DynamicResource EditWindow_Label_AppPath}" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="55"/>
+                <TextBox x:Name="Tb_AppName" HorizontalAlignment="Left" Height="23" Margin="70,60,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Center" KeyDown="Tb_KeyDown"/>
+                <TextBox x:Name="Tb_AppPath" HorizontalAlignment="Left" Height="23" Margin="70,88,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="229" VerticalContentAlignment="Center" KeyDown="Tb_KeyDown"/>
                 <Button Content="..." HorizontalAlignment="Left" Margin="304,88,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="Browse"/>
-                <Button Content="修改此项" HorizontalAlignment="Left" Margin="224,125,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Change"/>
+                <Button Content="{DynamicResource EditWindow_Button_Change}" HorizontalAlignment="Left" Margin="224,125,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Change"/>
                 <Button Content="↑" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="Up"/>
                 <Button Content="↓" HorizontalAlignment="Left" Margin="40,215,0,0" VerticalAlignment="Top" Width="25" Height="25" Click="Down"/>
-                <Label Content="【提示】关闭此窗口后所作修改即可生效" HorizontalAlignment="Left" Margin="101,215,0,0" VerticalAlignment="Top"/>
+                <Label Content="{DynamicResource EditWindow_Label_Tips}" HorizontalAlignment="Left" Margin="75,215,0,0" VerticalAlignment="Top" Width="252" HorizontalContentAlignment="Right"/>
             </Grid>
         </GroupBox>
     </Grid>

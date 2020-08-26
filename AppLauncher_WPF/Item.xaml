@@ -19,7 +19,7 @@
             <Image x:Name="Image_AppIcon" Height="64" Width="64" Margin="13,17,171,17" Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="None"/>
             <Label x:Name="Label_AppName" Content="AppName" Margin="82,10,13,3" FontSize="18" Grid.ColumnSpan="2"/>
             <Label x:Name="Label_FileName" Content="FileName" Margin="82,35,13,37" Foreground="Gray" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-            <Button x:Name="Button_Start" Content="启动" Margin="85,19,103,12" Click="Start_Click" BorderBrush="LightGray" Background="#FFF3F3F3" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Button x:Name="Button_Start" Content="{DynamicResource Item_Button_Start}" Margin="85,19,103,12" Click="Start_Click" BorderBrush="LightGray" Background="#FFF3F3F3" Grid.Row="1" Grid.ColumnSpan="2"/>
         </Grid>
     </Border>
 </UserControl>

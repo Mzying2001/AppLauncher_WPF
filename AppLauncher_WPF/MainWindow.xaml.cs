@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,10 +27,49 @@ namespace AppLauncher_WPF
     public partial class MainWindow : Window
     {
 
-
         private AppList al;
         readonly WindowConfig wc;
 
+        /*支持切换的语言*/
+        readonly string[] supported_language = { "ZH", "EN" };
+
+        /*当前语言*/
+        private string current = "ZH";
+        private string CurrentLanguage
+        {
+            get => current;
+
+            set
+            {
+                if (!supported_language.Contains(value) || current.Equals(value))
+                    return;
+
+                foreach(MenuItem mi in LangSwitch.Items)
+                {
+                    mi.IsChecked = false;
+                }
+                
+                switch (value)
+                {
+                    case "ZH":
+                        LangSwitch_ZH.IsChecked = true;
+                        break;
+
+                    case "EN":
+                        LangSwitch_EN.IsChecked = true;
+                        break;
+
+                    default:
+                        return;
+                }
+
+                Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary()
+                {
+                    Source = new Uri($@"Language\{value}.xaml", UriKind.Relative)
+                };
+                current = value;
+            }
+        }
 
         public MainWindow()
         {
@@ -116,6 +156,18 @@ namespace AppLauncher_WPF
         }
 
         /// <summary>
+        /// 载入应用程序
+        /// </summary>
+        private void LoadApps()
+        {
+            Table.Children.Clear();
+            foreach (Appconf ac in al)
+            {
+                Table.Children.Add(new Item(ac));
+            }
+        }
+
+        /// <summary>
         /// 菜单“编辑App列表”被单击
         /// </summary>
         private void EditItems(object sender, RoutedEventArgs e)
@@ -137,15 +189,19 @@ namespace AppLauncher_WPF
         }
 
         /// <summary>
-        /// 载入应用程序
+        /// 切换中文
         /// </summary>
-        private void LoadApps()
+        private void LangSwitch_ZH_Click(object sender, RoutedEventArgs e)
         {
-            Table.Children.Clear();
-            foreach(Appconf ac in al)
-            {
-                Table.Children.Add(new Item(ac));
-            }
+            CurrentLanguage = "ZH";
+        }
+
+        /// <summary>
+        /// 切换英文
+        /// </summary>
+        private void LangSwitch_EN_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentLanguage = "EN";
         }
     }
 }
