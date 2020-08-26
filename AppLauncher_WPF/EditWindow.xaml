@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppLauncher_WPF"
         mc:Ignorable="d"
-        Title="{DynamicResource EditWindow_Title}" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" Closing="Window_Closing">
+        Title="{DynamicResource EditWindow_Title}" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Topmost="True" Closing="Window_Closing">
     <Grid>
         <ListBox x:Name="Lb_Apps" HorizontalAlignment="Left" Height="301" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Stretch" Margin="10,10,0,0" SelectionChanged="Lb_Apps_SelectionChanged"/>
         <Button x:Name="B_Add" Content="{DynamicResource EditWindiw_Button_Add}" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>

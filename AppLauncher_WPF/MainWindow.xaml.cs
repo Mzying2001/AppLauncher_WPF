@@ -173,7 +173,7 @@ namespace AppLauncher_WPF
         private void EditItems(object sender, RoutedEventArgs e)
         {
             MainGrid.Effect = new BlurEffect() { Radius = 25 };
-            al = new EditWindow(al).ShowDialog();
+            al = new EditWindow(al) { Owner = this }.ShowDialog();
             LoadApps();
             MainGrid.Effect = null;
         }
