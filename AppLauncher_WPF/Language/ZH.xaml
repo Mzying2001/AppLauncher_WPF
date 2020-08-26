@@ -8,6 +8,8 @@
     <sys:String x:Key="MainWindow_Title">App启动器</sys:String>
     <sys:String x:Key="MainWindow_Menu_Options">选项</sys:String>
     <sys:String x:Key="MainWindow_Menu_Language">语言</sys:String>
+    <sys:String x:Key="MainWindow_Menu_MinAfterLaunch">启动App后最小化窗口</sys:String>
+    <sys:String x:Key="MainWindow_Menu_WindowTopmost">窗口顶置</sys:String>
     <sys:String x:Key="MainWindow_Menu_Edit">编辑App列表</sys:String>
     <sys:String x:Key="MainWindow_Menu_Help">帮助</sys:String>
     <sys:String x:Key="MainWindow_Menu_About">关于</sys:String>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,29 @@ namespace Config
         /// 文件是否存在
         /// </summary>
         public bool IsFileExists => File.Exists(Path);
+
+        /// <summary>
+        /// 写入值
+        /// </summary>
+        private void WriteValue(string section, string key, object value)
+        {
+            this[section, key] = value.ToString();
+        }
+
+        /// <summary>
+        /// 读取布尔值
+        /// </summary>
+        private bool GetBool(string section, string key)
+        {
+            try
+            {
+                return bool.Parse(this[section, key]);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         /// <summary>
         /// 语言
@@ -34,12 +58,19 @@ namespace Config
         /// </summary>
         public bool MinAfterLaunch
         {
-            get => bool.Parse(this["MAIN", "MinAfterLaunch"]);
+            get => GetBool("MAIN", "MinAfterLaunch");
 
-            set
-            {
-                this["MAIN", "MinAfterLaunch"] = value.ToString();
-            }
+            set => WriteValue("MAIN", "MinAfterLaunch", value);
+        }
+
+        /// <summary>
+        /// 窗口置顶
+        /// </summary>
+        public bool WindowTopmost
+        {
+            get => GetBool("MAIN", "Topmost");
+
+            set => WriteValue("MAIN", "Topmost", value);
         }
     }
 }

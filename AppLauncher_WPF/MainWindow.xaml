@@ -8,11 +8,13 @@
         Title="{DynamicResource MainWindow_Title}" Height="450" Width="800" Closing="Window_Closing" SizeChanged="Window_SizeChanged" MinWidth="300" MinHeight="300">
     <Grid Name="MainGrid">
         <Menu Height="22" Background="White" VerticalAlignment="Top">
-            <MenuItem Header="{DynamicResource MainWindow_Menu_Options}" Height="22">
+            <MenuItem Header="{DynamicResource MainWindow_Menu_Options}" Height="22" SubmenuOpened="MenuItem_Options_SubmenuOpened">
                 <MenuItem Name="LangSwitch" Header="{DynamicResource MainWindow_Menu_Language}">
                     <MenuItem Name="LangSwitch_ZH" Header="中文" Click="LangSwitch_ZH_Click" IsChecked="True"/>
                     <MenuItem Name="LangSwitch_EN" Header="English" Click="LangSwitch_EN_Click"/>
                 </MenuItem>
+                <MenuItem Name="MinAfterLaunch" Header="{DynamicResource MainWindow_Menu_MinAfterLaunch}" Click="MinAfterLaunch_Click"/>
+                <MenuItem Name="WindowTopmost" Header="{DynamicResource MainWindow_Menu_WindowTopmost}" Click="WindowTopmost_Click"/>
                 <Separator/>
                 <MenuItem Header="{DynamicResource MainWindow_Menu_Edit}" Click="EditItems_Click"/>
             </MenuItem>

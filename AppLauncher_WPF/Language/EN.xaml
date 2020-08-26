@@ -8,6 +8,8 @@
     <sys:String x:Key="MainWindow_Title">AppLauncher</sys:String>
     <sys:String x:Key="MainWindow_Menu_Options">options</sys:String>
     <sys:String x:Key="MainWindow_Menu_Language">Language</sys:String>
+    <sys:String x:Key="MainWindow_Menu_MinAfterLaunch">Minimize after app launch</sys:String>
+    <sys:String x:Key="MainWindow_Menu_WindowTopmost">Window top-most</sys:String>
     <sys:String x:Key="MainWindow_Menu_Edit">Edit AppList</sys:String>
     <sys:String x:Key="MainWindow_Menu_Help">Help</sys:String>
     <sys:String x:Key="MainWindow_Menu_About">About</sys:String>

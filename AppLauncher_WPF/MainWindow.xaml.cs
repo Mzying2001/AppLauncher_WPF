@@ -41,21 +41,21 @@ namespace AppLauncher_WPF
         readonly string[] supported_language = { "ZH", "EN" };
 
         /*当前语言*/
-        private string current = "ZH"; //默认为中文
+        private string _current = "ZH"; //默认为中文
         private string CurrentLanguage
         {
-            get => current;
+            get => _current;
 
             set
             {
-                if (!supported_language.Contains(value) || current.Equals(value))
+                if (!supported_language.Contains(value) || _current.Equals(value))
                     return;
 
-                foreach(MenuItem mi in LangSwitch.Items)
+                foreach (MenuItem mi in LangSwitch.Items)
                 {
                     mi.IsChecked = false;
                 }
-                
+
                 switch (value)
                 {
                     case "ZH":
@@ -74,13 +74,19 @@ namespace AppLauncher_WPF
                 {
                     Source = new Uri($@"Language\{value}.xaml", UriKind.Relative)
                 };
-                current = value;
+                _current = value;
             }
         }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            conf = new Conf
+            {
+                alc = new AppLauncherConfig(AppDomain.CurrentDomain.BaseDirectory + "Config.ini"),
+                wc  = new WindowConfig(AppDomain.CurrentDomain.BaseDirectory + "Window.ini")
+            };
 
             try
             {//读取AppList
@@ -109,7 +115,6 @@ namespace AppLauncher_WPF
             LoadApps();
 
             /*设置语言*/
-            conf.alc = new AppLauncherConfig(AppDomain.CurrentDomain.BaseDirectory + "Config.ini");
             if (conf.alc.IsFileExists)
             {
                 CurrentLanguage = conf.alc.Language;
@@ -119,10 +124,11 @@ namespace AppLauncher_WPF
                 CurrentLanguage = new SelectLangWindow().ShowDialog();
             }
 
+            /*窗口是否要顶置*/
+            Topmost = conf.alc.WindowTopmost;
+
             try
             {//读取窗口配置
-
-                conf.wc = new WindowConfig(AppDomain.CurrentDomain.BaseDirectory + "Window.ini");
 
                 if (!conf.wc.IsFileExists)
                 {
@@ -184,8 +190,20 @@ namespace AppLauncher_WPF
             Table.Children.Clear();
             foreach (Appconf ac in al)
             {
-                Table.Children.Add(new Item(ac));
+                Item i = new Item(ac);
+
+                Table.Children.Add(i);
+                i.Button_Start.Click += AppStarted;
             }
+        }
+
+        /// <summary>
+        /// 单击启动按钮
+        /// </summary>
+        private void AppStarted(object sender, RoutedEventArgs e)
+        {
+            if (conf.alc.MinAfterLaunch)
+                WindowState = WindowState.Minimized;
         }
 
         /// <summary>
@@ -243,6 +261,32 @@ namespace AppLauncher_WPF
         private void LangSwitch_EN_Click(object sender, RoutedEventArgs e)
         {
             CurrentLanguage = "EN";
+        }
+
+        /// <summary>
+        /// 启动App后最小化窗口
+        /// </summary>
+        private void MinAfterLaunch_Click(object sender, RoutedEventArgs e)
+        {
+            conf.alc.MinAfterLaunch = !conf.alc.MinAfterLaunch;
+        }
+
+        /// <summary>
+        /// 窗口置顶
+        /// </summary>
+        private void WindowTopmost_Click(object sender, RoutedEventArgs e)
+        {
+            Topmost = !conf.alc.WindowTopmost;
+            conf.alc.WindowTopmost = Topmost;
+        }
+
+        /// <summary>
+        /// 打开菜单“选项”
+        /// </summary>
+        private void MenuItem_Options_SubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            MinAfterLaunch.IsChecked = conf.alc.MinAfterLaunch;
+            WindowTopmost.IsChecked = conf.alc.WindowTopmost;
         }
     }
 }
