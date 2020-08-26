@@ -11,6 +11,7 @@
     <sys:String x:Key="MainWindow_Menu_Edit">编辑App列表</sys:String>
     <sys:String x:Key="MainWindow_Menu_Help">帮助</sys:String>
     <sys:String x:Key="MainWindow_Menu_About">关于</sys:String>
+    <sys:String x:Key="MainWindow_Menu_ViewSourceCode">查看源代码</sys:String>
 
     <sys:String x:Key="EditWindow_Title">App列表</sys:String>
     <sys:String x:Key="EditWindiw_Button_Add">添加</sys:String>

@@ -14,10 +14,12 @@
                     <MenuItem Name="LangSwitch_EN" Header="English" Click="LangSwitch_EN_Click"/>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="{DynamicResource MainWindow_Menu_Edit}" Click="EditItems"/>
+                <MenuItem Header="{DynamicResource MainWindow_Menu_Edit}" Click="EditItems_Click"/>
             </MenuItem>
             <MenuItem Header="{DynamicResource MainWindow_Menu_Help}" Height="22">
-                <MenuItem Header="{DynamicResource MainWindow_Menu_About}" Click="About"/>
+                <MenuItem Header="{DynamicResource MainWindow_Menu_ViewSourceCode}" Click="ViewSourceCode_Click"/>
+                <Separator/>
+                <MenuItem Header="{DynamicResource MainWindow_Menu_About}" Click="About_Click"/>
             </MenuItem>
         </Menu>
         <ScrollViewer x:Name="Scroll" VerticalScrollBarVisibility="Auto" Margin="0,22,0,0">

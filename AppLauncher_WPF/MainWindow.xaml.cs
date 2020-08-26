@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -200,7 +201,7 @@ namespace AppLauncher_WPF
         /// <summary>
         /// 菜单“编辑App列表”被单击
         /// </summary>
-        private void EditItems(object sender, RoutedEventArgs e)
+        private void EditItems_Click(object sender, RoutedEventArgs e)
         {
             DoWithBlurEffect(() =>
             {
@@ -210,9 +211,17 @@ namespace AppLauncher_WPF
         }
 
         /// <summary>
+        /// 查看源代码
+        /// </summary>
+        private void ViewSourceCode_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Mzying2001/AppLauncher_WPF");
+        }
+
+        /// <summary>
         /// 菜单“关于”被单击
         /// </summary>
-        private void About(object sender, RoutedEventArgs e)
+        private void About_Click(object sender, RoutedEventArgs e)
         {
             DoWithBlurEffect(() =>
             {
