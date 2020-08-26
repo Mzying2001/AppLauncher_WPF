@@ -16,6 +16,9 @@ namespace Config
         /// </summary>
         public bool IsFileExists => File.Exists(Path);
 
+        /// <summary>
+        /// 语言
+        /// </summary>
         public string Language
         {
             get => this["MAIN", "Language"];
@@ -23,6 +26,19 @@ namespace Config
             set
             {
                 this["MAIN", "Language"] = value;
+            }
+        }
+
+        /// <summary>
+        /// 启动App后最小化窗口
+        /// </summary>
+        public bool MinAfterLaunch
+        {
+            get => bool.Parse(this["MAIN", "MinAfterLaunch"]);
+
+            set
+            {
+                this["MAIN", "MinAfterLaunch"] = value.ToString();
             }
         }
     }
