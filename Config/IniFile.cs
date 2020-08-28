@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,15 +15,26 @@ namespace Config
     {
 
 
-        /*声明变量*/
+        /// <summary>
+        /// 配置文件路径
+        /// </summary>
         public string Path;
 
+        /// <summary>
+        /// 文件是否存在
+        /// </summary>
+        public bool IsFileExists => File.Exists(Path);
+
+        public IniFile(string path)
+        {
+            Path = path;
+        }
 
         [DllImport("kernel32")]
-        public static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
 
         [DllImport("kernel32")]
-        public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
         /// <summary>
         /// 向配置文件写入值
@@ -42,21 +54,11 @@ namespace Config
             return sb.ToString().Trim();
         }
 
-        public IniFile(string path)
-        {
-            Path = path;
-        }
-
         public string this[string section, string key]
         {
-            get
-            {
-                return ProfileReadValue(section, key, Path);
-            }
-            set
-            {
-                ProfileWriteValue(section, key, value, Path);
-            }
+            get => ProfileReadValue(section, key, Path);
+
+            set => ProfileWriteValue(section, key, value, Path);
         }
     }
 }
