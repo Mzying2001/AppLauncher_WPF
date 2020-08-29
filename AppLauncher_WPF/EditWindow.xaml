@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="{DynamicResource EditWindow_Title}" Height="350" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Topmost="True" Closing="Window_Closing">
     <Grid>
-        <ListBox x:Name="Lb_Apps" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Stretch" Margin="10,10,0,10" SelectionChanged="Lb_Apps_SelectionChanged"/>
+        <ListBox x:Name="Lb_Apps" HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Stretch" Margin="10,10,0,10" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="Lb_Apps_SelectionChanged"/>
         <Button x:Name="B_Add" Content="{DynamicResource EditWindow_Button_Add}" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="AddItem"/>
         <Button x:Name="B_Del" Content="{DynamicResource EditWindow_Button_Remove}" HorizontalAlignment="Left" Margin="215,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="RemoveItem"/>
         <GroupBox x:Name="Gb" Header="{DynamicResource EditWindow_GroupBoxTitle}" HorizontalAlignment="Left" Height="262" Margin="135,39,10,0" VerticalAlignment="Top" Width="339">
