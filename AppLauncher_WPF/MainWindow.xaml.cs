@@ -244,7 +244,10 @@ namespace AppLauncher_WPF
         {
             DoWithBlurEffect(() =>
             {
-                MessageBox.Show($"AppLauncher v{Application.ResourceAssembly.GetName().Version} by Mzying2001 (颖)", FindResource("MessageBoxTitle_About") as string);
+                new AboutBox()
+                {
+                    Text = $"{FindResource("MainWindow_Menu_About")} {Title}",
+                }.ShowDialog();
             });
         }
 

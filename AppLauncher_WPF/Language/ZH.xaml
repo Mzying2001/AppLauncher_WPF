@@ -16,7 +16,7 @@
     <sys:String x:Key="MainWindow_Menu_ViewSourceCode">查看源代码</sys:String>
 
     <sys:String x:Key="EditWindow_Title">App列表</sys:String>
-    <sys:String x:Key="EditWindiw_Button_Add">添加</sys:String>
+    <sys:String x:Key="EditWindow_Button_Add">添加</sys:String>
     <sys:String x:Key="EditWindow_Button_Remove">删除</sys:String>
     <sys:String x:Key="EditWindow_GroupBoxTitle">编辑</sys:String>
     <sys:String x:Key="EditWindow_Label_AppName">程序名：</sys:String>

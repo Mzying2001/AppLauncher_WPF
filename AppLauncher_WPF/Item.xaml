@@ -8,7 +8,7 @@
              d:DesignHeight="100" d:DesignWidth="250" MinWidth="250" MinHeight="100" MaxWidth="250" MaxHeight="100" HorizontalAlignment="Left" VerticalAlignment="Top">
     <Border CornerRadius="15" Background="White" BorderBrush="#FFE6E6E6" BorderThickness="1">
         <Grid>
-            <Image x:Name="Image_AppIcon" Height="64" Width="64" Margin="13,17,171,17" Grid.RowSpan="2" Grid.ColumnSpan="2" Stretch="None"/>
+            <Image x:Name="Image_AppIcon" Height="64" Width="64" Margin="13,17,171,17" Stretch="None"/>
             <Label x:Name="Label_AppName" Content="AppName" Margin="82,10,13,52" FontSize="18"/>
             <Label x:Name="Label_FileName" Content="FileName" Margin="82,35,13,37" Foreground="Gray" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             <Button x:Name="Button_Start" Content="{DynamicResource Item_Button_Start}" Margin="88,68,100,10" Click="Start_Click" BorderBrush="LightGray" Background="#FFF3F3F3"/>
