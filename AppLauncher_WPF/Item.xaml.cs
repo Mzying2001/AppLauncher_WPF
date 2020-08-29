@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Launcher;
+using System.Threading;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace AppLauncher_WPF
 {
@@ -88,5 +92,72 @@ namespace AppLauncher_WPF
                         new Int32Rect(0, 0, icon.Width, icon.Height),
                         BitmapSizeOptions.FromEmptyOptions());
         }
+
+        public void ChangeAppName(string name)
+        {
+            ac.AppName = name;
+            AppName = name;
+        }
+
+        private void MenuItem_Explore_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("Explorer.exe")
+            {
+                Arguments = "/e,/select," + ac.AppPath
+            });
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ShowFileProperties(ac.AppPath);
+        }
+
+        #region 查看文件属性
+
+        //来自：https://bbs.csdn.net/topics/370078839
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SHELLEXECUTEINFO
+        {
+            public int cbSize;
+            public uint fMask;
+            public IntPtr hwnd;
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpVerb;
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpFile;
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpParameters;
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpDirectory;
+            public int nShow;
+            public IntPtr hInstApp;
+            public IntPtr lpIDList;
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpClass;
+            public IntPtr hkeyClass;
+            public uint dwHotKey;
+            public IntPtr hIcon;
+            public IntPtr hProcess;
+        }
+
+        private const int SW_SHOW = 5;
+        private const uint SEE_MASK_INVOKEIDLIST = 12;
+
+        [DllImport("shell32.dll")]
+        static extern bool ShellExecuteEx(ref SHELLEXECUTEINFO lpExecInfo);
+
+        public static void ShowFileProperties(string Filename)
+        {
+            SHELLEXECUTEINFO info = new SHELLEXECUTEINFO();
+            info.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(info);
+            info.lpVerb = "properties";
+            info.lpFile = Filename;
+            info.nShow = SW_SHOW;
+            info.fMask = SEE_MASK_INVOKEIDLIST;
+            ShellExecuteEx(ref info);
+        }
+
+        #endregion
     }
 }

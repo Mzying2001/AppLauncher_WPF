@@ -2,8 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:AppLauncher_WPF.Language"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    
+
     <sys:String x:Key="Item_Button_Start">启动</sys:String>
+    <sys:String x:Key="Item_ShowInExplorer">打开文件所在的位置</sys:String>
+    <sys:String x:Key="Item_ShowFileProperties">属性</sys:String>
 
     <sys:String x:Key="MainWindow_Title">App启动器</sys:String>
     <sys:String x:Key="MainWindow_Menu_Options">选项</sys:String>
@@ -33,5 +35,5 @@
     <sys:String x:Key="MessageBoxTitle_Error">错误</sys:String>
     <sys:String x:Key="MessageBoxTitle_Message">信息</sys:String>
     <sys:String x:Key="MessageBoxTitle_WindowConfError">窗口配置错误</sys:String>
-    
+
 </ResourceDictionary>
