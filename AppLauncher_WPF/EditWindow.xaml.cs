@@ -62,8 +62,8 @@ namespace AppLauncher_WPF
             {
                 Gb.IsEnabled = false;
                 B_Del.IsEnabled = false;
-                Tb_AppName.Text = "NULL";
-                Tb_AppPath.Text = "NULL";
+                Tb_AppName.Text = null;
+                Tb_AppPath.Text = null;
             }
         }
 
@@ -97,13 +97,14 @@ namespace AppLauncher_WPF
             try
             {
                 int index = Lb_Apps.SelectedIndex;
-                if (
-                    MessageBox.Show(
-                        string.Format(FindResource("EditWindow_Message_AreYouSureToRemove") as string, AL[index].AppName),
-                        FindResource("MessageBoxTitle_Message") as string,
-                        MessageBoxButton.YesNo
-                    ) == MessageBoxResult.Yes
-                    )
+
+                MessageBoxResult result = MessageBox.Show(
+                    string.Format(FindResource("EditWindow_Message_AreYouSureToRemove") as string, AL[index].AppName),
+                    FindResource("MessageBoxTitle_Message") as string,
+                    MessageBoxButton.YesNo
+                    );
+
+                if (result == MessageBoxResult.Yes)
                 {
                     Lb_Apps.Items.RemoveAt(index);
                     AL.RemoveAt(index);

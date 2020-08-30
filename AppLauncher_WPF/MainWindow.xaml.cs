@@ -48,14 +48,15 @@ namespace AppLauncher_WPF
 
             set
             {
+                /*如果不支持该语言或与当前语言相同，则不执行任何操作*/
                 if (!supported_language.Contains(value) || _current.Equals(value))
                     return;
 
+                /*取消选中“语言”菜单中的所有选项*/
                 foreach (MenuItem mi in LangSwitch.Items)
-                {
                     mi.IsChecked = false;
-                }
 
+                /*选中“语言”菜单中相应的语言选项*/
                 switch (value)
                 {
                     case "ZH":
@@ -70,6 +71,7 @@ namespace AppLauncher_WPF
                         return;
                 }
 
+                /*切换语言*/
                 Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary()
                 {
                     Source = new Uri($@"Language\{value}.xaml", UriKind.Relative)
@@ -115,25 +117,17 @@ namespace AppLauncher_WPF
             LoadApps();
 
             /*设置语言*/
-            if (conf.alc.IsFileExists)
-            {
-                CurrentLanguage = conf.alc.Language;
-            }
-            else
-            {
-                CurrentLanguage = new SelectLangWindow().ShowDialog();
-            }
-
+            CurrentLanguage = conf.alc.IsFileExists ? conf.alc.Language : new SelectLangWindow().ShowDialog();
+            
             /*窗口是否要顶置*/
             Topmost = conf.alc.WindowTopmost;
 
             try
             {//读取窗口配置
 
+                /*配置文件不存在，则不执行后面的操作*/
                 if (!conf.wc.IsFileExists)
-                {
                     return;
-                }
 
                 double x = conf.wc.X; //左边
                 double y = conf.wc.Y; //顶边
@@ -244,10 +238,7 @@ namespace AppLauncher_WPF
         {
             DoWithBlurEffect(() =>
             {
-                new AboutBox()
-                {
-                    Text = $"{FindResource("MainWindow_Menu_About")} {Title}",
-                }.ShowDialog();
+                new AboutBox() { Text = $"{FindResource("MainWindow_Menu_About")} {Title}" }.ShowDialog();
             });
         }
 
