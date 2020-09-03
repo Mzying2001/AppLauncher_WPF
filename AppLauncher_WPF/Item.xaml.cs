@@ -80,7 +80,7 @@ namespace AppLauncher_WPF
             try
             {
                 EXELauncher.Start(ac);
-                AppStarted(this, e);
+                AppStarted?.Invoke(this, e);
             }
             catch (Exception ex)
             {
