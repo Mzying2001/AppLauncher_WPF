@@ -188,7 +188,7 @@ namespace AppLauncher_WPF
                 Item i = new Item(ac);
 
                 Table.Children.Add(i);
-                i.Button_Start.Click += AppStarted;
+                i.AppStarted = AppStarted;
             }
         }
 

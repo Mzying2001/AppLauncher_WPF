@@ -30,6 +30,8 @@ namespace AppLauncher_WPF
 
         private readonly Appconf ac;
 
+        public RoutedEventHandler AppStarted;
+
 
         public Item(Appconf ac)
         {
@@ -78,19 +80,12 @@ namespace AppLauncher_WPF
             try
             {
                 EXELauncher.Start(ac);
+                AppStarted(this, e);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, FindResource("MessageBoxTitle_Error") as string);
             }
-        }
-
-        private static ImageSource GetIcon(string fileName)
-        {
-            System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(fileName);
-            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
-                        icon.Handle,
-                        new Int32Rect(0, 0, icon.Width, icon.Height),
-                        BitmapSizeOptions.FromEmptyOptions());
         }
 
         public void ChangeAppName(string name)
@@ -112,8 +107,18 @@ namespace AppLauncher_WPF
             ShowFileProperties(ac.AppPath);
         }
 
-        #region 查看文件属性
+        #region 获取App图标
+        private static ImageSource GetIcon(string fileName)
+        {
+            System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(fileName);
+            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                        icon.Handle,
+                        new Int32Rect(0, 0, icon.Width, icon.Height),
+                        BitmapSizeOptions.FromEmptyOptions());
+        }
+        #endregion
 
+        #region 查看文件属性
         //来自：https://bbs.csdn.net/topics/370078839
 
         [StructLayout(LayoutKind.Sequential)]
@@ -157,7 +162,6 @@ namespace AppLauncher_WPF
             info.fMask = SEE_MASK_INVOKEIDLIST;
             ShellExecuteEx(ref info);
         }
-
         #endregion
     }
 }

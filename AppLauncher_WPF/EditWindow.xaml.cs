@@ -24,15 +24,15 @@ namespace AppLauncher_WPF
     {
 
 
-        private readonly AppList AL;
+        private readonly AppList al;
 
 
         public EditWindow(AppList al)
         {
             InitializeComponent();
 
-            AL = al;
-            foreach(Appconf ac in AL)
+            this.al = al;
+            foreach(Appconf ac in this.al)
             {
                 Lb_Apps.Items.Add(ac.AppName);
             }
@@ -40,23 +40,23 @@ namespace AppLauncher_WPF
             Lb_Apps_SelectionChanged(null, null);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => AL.Save();
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => al.Save();
 
         public new AppList ShowDialog()
         {
             base.ShowDialog();
-            return AL;
+            return al;
         }
 
         private void Lb_Apps_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = Lb_Apps.SelectedIndex;
-            if (index >= 0 && index < AL.Count)
+            if (index >= 0 && index < al.Count)
             {
                 Gb.IsEnabled = true;
                 B_Del.IsEnabled = true;
-                Tb_AppName.Text = AL[index].AppName;
-                Tb_AppPath.Text = AL[index].AppPath;
+                Tb_AppName.Text = al[index].AppName;
+                Tb_AppPath.Text = al[index].AppPath;
             }
             else
             {
@@ -81,7 +81,7 @@ namespace AppLauncher_WPF
                     string path = $"{AppDomain.CurrentDomain.BaseDirectory}APPCONF\\{DateTime.Now.Ticks}.appconf";
 
                     Appconf ac = Appconf.Create(path, file.Substring(file.LastIndexOf('\\') + 1, file.LastIndexOf('.') - file.LastIndexOf('\\') - 1), file);
-                    AL.Add(ac);
+                    al.Add(ac);
                     Lb_Apps.Items.Add(ac.AppName);
                     Lb_Apps.SelectedIndex = Lb_Apps.Items.Count - 1;
                 }
@@ -99,7 +99,7 @@ namespace AppLauncher_WPF
                 int index = Lb_Apps.SelectedIndex;
 
                 MessageBoxResult result = MessageBox.Show(
-                    string.Format(FindResource("EditWindow_Message_AreYouSureToRemove") as string, AL[index].AppName),
+                    string.Format(FindResource("EditWindow_Message_AreYouSureToRemove") as string, al[index].AppName),
                     FindResource("MessageBoxTitle_Message") as string,
                     MessageBoxButton.YesNo
                     );
@@ -107,7 +107,7 @@ namespace AppLauncher_WPF
                 if (result == MessageBoxResult.Yes)
                 {
                     Lb_Apps.Items.RemoveAt(index);
-                    AL.RemoveAt(index);
+                    al.RemoveAt(index);
 
                     if (Lb_Apps.Items.Count > 0)
                     {
@@ -151,10 +151,10 @@ namespace AppLauncher_WPF
                     throw new Exception(string.Format(FindResource("EditWindow_Message_NoApplication") as string, Tb_AppPath.Text));
 
                 int index = Lb_Apps.SelectedIndex;
-                AL[index].AppName = Tb_AppName.Text;
-                AL[index].AppPath = Tb_AppPath.Text;
+                al[index].AppName = Tb_AppName.Text;
+                al[index].AppPath = Tb_AppPath.Text;
                 Lb_Apps.Items.RemoveAt(index);
-                Lb_Apps.Items.Insert(index, AL[index].AppName);
+                Lb_Apps.Items.Insert(index, al[index].AppName);
                 Lb_Apps.SelectedIndex = index;
             }
             catch (Exception ex)
@@ -168,17 +168,17 @@ namespace AppLauncher_WPF
             int index = Lb_Apps.SelectedIndex;
             if (index > 0)
             {
-                Appconf tmp1 = AL[index];
-                Appconf tmp2 = AL[index - 1];
-                AL.RemoveAt(index, false);
-                AL.Insert(index, tmp2);
-                AL.RemoveAt(index - 1, false);
-                AL.Insert(index - 1, tmp1);
+                Appconf tmp1 = al[index];
+                Appconf tmp2 = al[index - 1];
+                al.RemoveAt(index, false);
+                al.Insert(index, tmp2);
+                al.RemoveAt(index - 1, false);
+                al.Insert(index - 1, tmp1);
 
                 Lb_Apps.Items.RemoveAt(index);
-                Lb_Apps.Items.Insert(index, AL[index].AppName);
+                Lb_Apps.Items.Insert(index, al[index].AppName);
                 Lb_Apps.Items.RemoveAt(index - 1);
-                Lb_Apps.Items.Insert(index - 1, AL[index - 1].AppName);
+                Lb_Apps.Items.Insert(index - 1, al[index - 1].AppName);
 
                 Lb_Apps.SelectedIndex = index - 1;
             }
@@ -189,17 +189,17 @@ namespace AppLauncher_WPF
             int index = Lb_Apps.SelectedIndex;
             if (index < Lb_Apps.Items.Count - 1)
             {
-                Appconf tmp1 = AL[index];
-                Appconf tmp2 = AL[index + 1];
-                AL.RemoveAt(index, false);
-                AL.Insert(index, tmp2);
-                AL.RemoveAt(index + 1, false);
-                AL.Insert(index + 1, tmp1);
+                Appconf tmp1 = al[index];
+                Appconf tmp2 = al[index + 1];
+                al.RemoveAt(index, false);
+                al.Insert(index, tmp2);
+                al.RemoveAt(index + 1, false);
+                al.Insert(index + 1, tmp1);
 
                 Lb_Apps.Items.RemoveAt(index);
-                Lb_Apps.Items.Insert(index, AL[index].AppName);
+                Lb_Apps.Items.Insert(index, al[index].AppName);
                 Lb_Apps.Items.RemoveAt(index + 1);
-                Lb_Apps.Items.Insert(index + 1, AL[index + 1].AppName);
+                Lb_Apps.Items.Insert(index + 1, al[index + 1].AppName);
 
                 Lb_Apps.SelectedIndex = index + 1;
             }
