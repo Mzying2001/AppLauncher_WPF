@@ -5,33 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppLauncher_WPF"
         mc:Ignorable="d"
-        Title="{DynamicResource MainWindow_Title}" Height="450" Width="800" Closing="Window_Closing" SizeChanged="Window_SizeChanged" MinWidth="300" MinHeight="300">
+        
+        Title="{DynamicResource MainWindow_Title}"
+        Width="800"
+        Height="450"
+        MinWidth="300"
+        MinHeight="300"
+        Closing="Window_Closing"
+        SizeChanged="Window_SizeChanged">
+
     <Grid Name="MainGrid">
+
         <Menu Height="22" Background="White" VerticalAlignment="Top">
-            <MenuItem Header="{DynamicResource MainWindow_Menu_Options}" Height="22" SubmenuOpened="MenuItem_Options_SubmenuOpened">
-                <MenuItem Name="LangSwitch" Header="{DynamicResource MainWindow_Menu_Language}">
-                    <MenuItem Name="LangSwitch_ZH" Header="中文" Click="LangSwitch_ZH_Click" IsChecked="True"/>
-                    <MenuItem Name="LangSwitch_EN" Header="English" Click="LangSwitch_EN_Click"/>
+
+            <!--“选项”菜单-->
+            <MenuItem
+                Header="{DynamicResource MainWindow_Menu_Options}"
+                Height="22"
+                SubmenuOpened="MenuItem_Options_SubmenuOpened">
+
+                <!--“语言”选项-->
+                <MenuItem
+                    Name="LangSwitch"
+                    Header="{DynamicResource MainWindow_Menu_Language}">
+
+                    <!--中文-->
+                    <MenuItem
+                        Name="LangSwitch_ZH"
+                        Header="中文"
+                        Click="LangSwitch_ZH_Click"
+                        IsChecked="True"/>
+
+                    <!--英文-->
+                    <MenuItem
+                        Name="LangSwitch_EN"
+                        Header="English"
+                        Click="LangSwitch_EN_Click"/>
                 </MenuItem>
-                <MenuItem Name="MinAfterLaunch" Header="{DynamicResource MainWindow_Menu_MinAfterLaunch}" Click="MinAfterLaunch_Click"/>
-                <MenuItem Name="WindowTopmost" Header="{DynamicResource MainWindow_Menu_WindowTopmost}" Click="WindowTopmost_Click"/>
+
+                <!--“启动App后最小化窗口”选项-->
+                <MenuItem
+                    Name="MinAfterLaunch"
+                    Header="{DynamicResource MainWindow_Menu_MinAfterLaunch}"
+                    Click="MinAfterLaunch_Click"/>
+
+                <!--“窗口顶置”选项-->
+                <MenuItem
+                    Name="WindowTopmost"
+                    Header="{DynamicResource MainWindow_Menu_WindowTopmost}"
+                    Click="WindowTopmost_Click"/>
+
                 <Separator/>
-                <MenuItem Header="{DynamicResource MainWindow_Menu_Edit}" Click="EditItems_Click"/>
+
+                <!--“编辑App列表”选项-->
+                <MenuItem
+                    Header="{DynamicResource MainWindow_Menu_Edit}"
+                    Click="EditItems_Click"/>
             </MenuItem>
-            <MenuItem Header="{DynamicResource MainWindow_Menu_Help}" Height="22">
-                <MenuItem Header="{DynamicResource MainWindow_Menu_ViewSourceCode}" Click="ViewSourceCode_Click"/>
+
+            <!--“帮助”菜单-->
+            <MenuItem
+                Header="{DynamicResource MainWindow_Menu_Help}"
+                Height="22">
+
+                <!--“查看源代码”选项-->
+                <MenuItem
+                    Header="{DynamicResource MainWindow_Menu_ViewSourceCode}"
+                    Click="ViewSourceCode_Click"/>
+
                 <Separator/>
-                <MenuItem Header="{DynamicResource MainWindow_Menu_About}" Click="About_Click"/>
+
+                <!--“关于”选项-->
+                <MenuItem
+                    Header="{DynamicResource MainWindow_Menu_About}"
+                    Click="About_Click"/>
             </MenuItem>
         </Menu>
-        <ScrollViewer x:Name="Scroll" VerticalScrollBarVisibility="Auto" Margin="0,22,0,0">
-            <WrapPanel x:Name="Table" HorizontalAlignment="Center" Width="768" VerticalAlignment="Top" Height="200">
+
+        <ScrollViewer
+            x:Name="Scroll"
+            Margin="0,22,0,0"
+            VerticalScrollBarVisibility="Auto">
+
+            <WrapPanel x:Name="Table"
+                       Width="768"
+                       Height="200"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top">
+
                 <WrapPanel.Resources>
                     <Style TargetType="{x:Type local:Item}">
                         <Setter Property="Margin" Value="5,5" />
                     </Style>
                 </WrapPanel.Resources>
+
             </WrapPanel>
         </ScrollViewer>
+
     </Grid>
 </Window>
