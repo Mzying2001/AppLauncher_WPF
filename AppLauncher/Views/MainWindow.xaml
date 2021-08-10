@@ -15,7 +15,9 @@
     Width="800"
     Height="450"
     MinWidth="300"
-    MinHeight="300">
+    MinHeight="300"
+    Topmost="{Binding WindowTopmost}"
+    WindowState="{Binding WindowState}">
 
     <Window.DataContext>
         <ViewModels:MainWindowViewModel/>
@@ -44,6 +46,14 @@
                 Command="{Binding Source={StaticResource VMProxy}, Path=Data.NewAppListCommand}"
                 InputGestureText="Ctrl+N"/>
             <Separator/>
+            <MenuItem
+                Header="窗口顶置"
+                IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.WindowTopmost}"
+                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ToggleWindowTopmostCommand}"/>
+            <MenuItem
+                Header="启动App后最小化窗口"
+                IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.MinimizeWindowAfterOpening}"
+                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ToggleMinimizeWindowAfterOpeningCommand}"/>
             <MenuItem
                 Header="启动失败时显示错误信息"
                 IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.ShowOpenErrorMsg}"

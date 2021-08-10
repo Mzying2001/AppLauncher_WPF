@@ -35,9 +35,22 @@ namespace AppLauncher.ViewModels
         public ICommand RenameAppItemCommand { get; set; }
         public ICommand ViewSourceCommand { get; set; }
         public ICommand ShowInExplorerCommand { get; set; }
+        public ICommand ToggleWindowTopmostCommand { get; set; }
+        public ICommand ToggleMinimizeWindowAfterOpeningCommand { get; set; }
         public ICommand ToggleShowOpenErrorMsgCommand { get; set; }
 
         public Action UpdateAppItemLayoutAction { get; set; }
+
+        private WindowState _windowState;
+        public WindowState WindowState
+        {
+            get => _windowState;
+            set
+            {
+                _windowState = value;
+                RaisePropertyChanged("WindowState");
+            }
+        }
 
         private int _appListListBoxSelectedIndex;
         public int AppListListBoxSelectedIndex
@@ -47,6 +60,28 @@ namespace AppLauncher.ViewModels
             {
                 _appListListBoxSelectedIndex = value;
                 RaisePropertyChanged("AppListListBoxSelectedIndex");
+            }
+        }
+
+        private bool _windowTopmost;
+        public bool WindowTopmost
+        {
+            get => _windowTopmost;
+            set
+            {
+                _windowTopmost = value;
+                RaisePropertyChanged("WindowTopmost");
+            }
+        }
+
+        private bool _minimizeWindowAfterOpening;
+        public bool MinimizeWindowAfterOpening
+        {
+            get => _minimizeWindowAfterOpening;
+            set
+            {
+                _minimizeWindowAfterOpening = value;
+                RaisePropertyChanged("MinimizeWindowAfterOpening");
             }
         }
 
@@ -71,6 +106,11 @@ namespace AppLauncher.ViewModels
 
             if ((int)info < 32 && ShowOpenErrorMsg)
                 MsgBoxHelper.ShowError($"启动时发生错误：{Executer.GetErrorStr(info)}");
+            else
+            {
+                if (MinimizeWindowAfterOpening)
+                    WindowState = WindowState.Minimized;
+            }
         }
 
         private void NewAppList(object obj)
@@ -293,6 +333,18 @@ namespace AppLauncher.ViewModels
             });
         }
 
+        private void ToggleWindowTopmost(object obj)
+        {
+            WindowTopmost = !WindowTopmost;
+            StaticData.Config.MainWindowTopmost = WindowTopmost;
+        }
+
+        private void ToggleMinimizeWindowAfterOpening(object obj)
+        {
+            MinimizeWindowAfterOpening = !MinimizeWindowAfterOpening;
+            StaticData.Config.MinimizeMainWindowAfterOpening = MinimizeWindowAfterOpening;
+        }
+
         private void ToggleShowOpenErrorMsg(object obj)
         {
             ShowOpenErrorMsg = !ShowOpenErrorMsg;
@@ -304,6 +356,8 @@ namespace AppLauncher.ViewModels
             var config = StaticData.Config;
 
             AppListListBoxSelectedIndex = config.AppListListBoxSelectedIndex;
+            WindowTopmost = config.MainWindowTopmost;
+            MinimizeWindowAfterOpening = config.MinimizeMainWindowAfterOpening;
             ShowOpenErrorMsg = config.ShowOpenErrorMessage;
         }
 
@@ -324,6 +378,8 @@ namespace AppLauncher.ViewModels
             RenameAppItemCommand = new DelegateCommand<AppItem> { Execute = RenameAppItem };
             ViewSourceCommand = new DelegateCommand { Execute = ViewSource };
             ShowInExplorerCommand = new DelegateCommand<AppItem> { Execute = ShowInExplorer };
+            ToggleWindowTopmostCommand = new DelegateCommand { Execute = ToggleWindowTopmost };
+            ToggleMinimizeWindowAfterOpeningCommand = new DelegateCommand { Execute = ToggleMinimizeWindowAfterOpening };
             ToggleShowOpenErrorMsgCommand = new DelegateCommand { Execute = ToggleShowOpenErrorMsg };
 
             AppItemListBoxOnDropCommand = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>

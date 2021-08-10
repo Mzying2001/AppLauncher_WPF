@@ -10,6 +10,10 @@ namespace AppLauncher.Models
 
         public int AppListListBoxSelectedIndex { get; set; }
 
+        public bool MainWindowTopmost { get; set; }
+
+        public bool MinimizeMainWindowAfterOpening { get; set; } = false;
+
         public bool ShowOpenErrorMessage { get; set; } = true;
     }
 }
