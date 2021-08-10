@@ -20,7 +20,9 @@ namespace AppLauncher
             var currentProcess = Process.GetCurrentProcess();
             var list = (from p
                         in Process.GetProcesses()
-                        where p.ProcessName == currentProcess.ProcessName && p.Id != currentProcess.Id
+                        where p.ProcessName == currentProcess.ProcessName &&
+                              p.Id != currentProcess.Id &&
+                              p.MainModule.FileName.ToString() == currentProcess.MainModule.FileName.ToString()
                         select p).ToList();
 
             foreach (var p in list)
