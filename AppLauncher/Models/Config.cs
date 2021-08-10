@@ -9,5 +9,7 @@ namespace AppLauncher.Models
         public WindowInfo MainWindowInfo { get; set; }
 
         public int AppListListBoxSelectedIndex { get; set; }
+
+        public bool ShowOpenErrorMessage { get; set; } = true;
     }
 }

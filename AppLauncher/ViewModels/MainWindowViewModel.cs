@@ -35,6 +35,7 @@ namespace AppLauncher.ViewModels
         public ICommand RenameAppItemCommand { get; set; }
         public ICommand ViewSourceCommand { get; set; }
         public ICommand ShowInExplorerCommand { get; set; }
+        public ICommand ToggleShowOpenErrorMsgCommand { get; set; }
 
         public Action UpdateAppItemLayoutAction { get; set; }
 
@@ -49,13 +50,27 @@ namespace AppLauncher.ViewModels
             }
         }
 
+        private bool _showOpenErrorMsg;
+        public bool ShowOpenErrorMsg
+        {
+            get => _showOpenErrorMsg;
+            set
+            {
+                _showOpenErrorMsg = value;
+                RaisePropertyChanged("ShowOpenErrorMsg");
+            }
+        }
+
         private AppList CurrentSelectedAppList => StaticData.AppLists[AppListListBoxSelectedIndex];
 
         private void OpenApp(AppItem app)
         {
             var path = PathHelper.FormatPath(app.AppPath);
-            Executer.ShellExecute(IntPtr.Zero, "open", path, string.Empty,
+            var info = Executer.ShellExecute(IntPtr.Zero, "open", path, string.Empty,
                 PathHelper.GetLocatedFolderPath(path), Executer.ShowCommands.SW_SHOWNORMAL);
+
+            if ((int)info < 32 && ShowOpenErrorMsg)
+                MsgBoxHelper.ShowError(Executer.GetErrorStr(info), "启动错误");
         }
 
         private void NewAppList(object obj)
@@ -278,9 +293,18 @@ namespace AppLauncher.ViewModels
             });
         }
 
+        private void ToggleShowOpenErrorMsg(object obj)
+        {
+            ShowOpenErrorMsg = !ShowOpenErrorMsg;
+            StaticData.Config.ShowOpenErrorMessage = ShowOpenErrorMsg;
+        }
+
         private void Init()
         {
-            AppListListBoxSelectedIndex = StaticData.Config.AppListListBoxSelectedIndex;
+            var config = StaticData.Config;
+
+            AppListListBoxSelectedIndex = config.AppListListBoxSelectedIndex;
+            ShowOpenErrorMsg = config.ShowOpenErrorMessage;
         }
 
         public MainWindowViewModel()
@@ -300,6 +324,7 @@ namespace AppLauncher.ViewModels
             RenameAppItemCommand = new DelegateCommand<AppItem> { Execute = RenameAppItem };
             ViewSourceCommand = new DelegateCommand { Execute = ViewSource };
             ShowInExplorerCommand = new DelegateCommand<AppItem> { Execute = ShowInExplorer };
+            ToggleShowOpenErrorMsgCommand = new DelegateCommand { Execute = ToggleShowOpenErrorMsg };
 
             AppItemListBoxOnDropCommand = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>
             { Execute = AppItemListBoxOnDrop };
