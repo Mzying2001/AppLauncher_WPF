@@ -43,6 +43,8 @@ namespace AppLauncher.Views
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            if (WindowState == WindowState.Minimized)
+                WindowState = WindowState.Normal;
             StaticData.Config.MainWindowInfo = WindowInfo.GetWindowInfo(this);
             StaticData.Config.AppListListBoxSelectedIndex = AppListListBox.SelectedIndex;
             base.OnClosing(e);
