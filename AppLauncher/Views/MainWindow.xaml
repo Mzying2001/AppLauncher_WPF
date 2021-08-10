@@ -45,7 +45,7 @@
                 InputGestureText="Ctrl+N"/>
             <Separator/>
             <MenuItem
-                Header="启动错误时显示错误信息"
+                Header="启动失败时显示错误信息"
                 IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.ShowOpenErrorMsg}"
                 Command="{Binding Source={StaticResource VMProxy}, Path=Data.ToggleShowOpenErrorMsgCommand}"/>
             <Separator/>

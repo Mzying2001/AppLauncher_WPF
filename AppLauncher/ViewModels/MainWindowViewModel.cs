@@ -70,7 +70,7 @@ namespace AppLauncher.ViewModels
                 PathHelper.GetLocatedFolderPath(path), Executer.ShowCommands.SW_SHOWNORMAL);
 
             if ((int)info < 32 && ShowOpenErrorMsg)
-                MsgBoxHelper.ShowError(Executer.GetErrorStr(info), "启动错误");
+                MsgBoxHelper.ShowError($"启动时发生错误：{Executer.GetErrorStr(info)}");
         }
 
         private void NewAppList(object obj)
