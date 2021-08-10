@@ -5,14 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppLauncher.Views"
         xmlns:Customs="clr-namespace:AppLauncher.Views.Custom"
+        xmlns:ViewModels="clr-namespace:AppLauncher.ViewModels"
         mc:Ignorable="d"
         
-        x:Name="Self"
         Width="400"
         ResizeMode="NoResize"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen"
-        Title="{Binding ElementName=Self, Path=AppItem.AppName, StringFormat=编辑“\{0\}”, TargetNullValue=编辑}">
+        Title="编辑">
+
+    <Window.DataContext>
+        <ViewModels:EditAppItemWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.InputBindings>
+        <KeyBinding
+            Key="Esc"
+            Command="{Binding CancelCommand}"/>
+        <KeyBinding
+            Key="Enter"
+            Command="{Binding OkCommand}"/>
+    </Window.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +39,7 @@
             Width="64"
             Height="64"
             Stretch="None"
-            Source="{Binding ElementName=tb_path, Path=Text, Converter={StaticResource Path2Icon}}"/>
+            Source="{Binding Path, Converter={StaticResource Path2Icon}}"/>
 
         <StackPanel
             Grid.Row="1"
@@ -39,7 +52,8 @@
                 x:Name="tb_name"
                 Margin="0,0,0,15"
                 Height="30"
-                Style="{StaticResource AppLauncherTextBoxBaseStyle}"/>
+                Style="{StaticResource AppLauncherTextBoxBaseStyle}"
+                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock
                 Text="路径"/>
@@ -47,7 +61,8 @@
                 x:Name="tb_path"
                 Margin="0,0,0,15"
                 Height="30"
-                Style="{StaticResource AppLauncherTextBoxBaseStyle}"/>
+                Style="{StaticResource AppLauncherTextBoxBaseStyle}"
+                Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}"/>
 
             <StackPanel
                 Orientation="Horizontal"
@@ -57,12 +72,14 @@
                     MinWidth="75"
                     Margin="0,0,15,0"
                     Content="取消"
-                    Style="{StaticResource AppLauncherButtonBaseStyle}" Click="CancelButton_Click"/>
+                    Style="{StaticResource AppLauncherButtonBaseStyle}"
+                    Command="{Binding CancelCommand}"/>
                 <Button
                     Height="30"
                     MinWidth="75"
                     Content="确定"
-                    Style="{StaticResource AppLauncherButtonBaseStyle}" Click="OkButton_Click"/>
+                    Style="{StaticResource AppLauncherButtonBaseStyle}"
+                    Command="{Binding OkCommand}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
