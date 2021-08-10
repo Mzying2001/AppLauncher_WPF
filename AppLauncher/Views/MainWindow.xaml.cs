@@ -37,8 +37,6 @@ namespace AppLauncher.Views
 
             if (StaticData.Config.MainWindowInfo != null)
                 StaticData.Config.MainWindowInfo.ApplyWindowInfo(this);
-            if (WindowState == WindowState.Minimized)
-                WindowState = WindowState.Normal;
         }
 
         protected override void OnClosing(CancelEventArgs e)
