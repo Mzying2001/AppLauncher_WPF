@@ -103,7 +103,7 @@
                 Orientation="Horizontal">
                 <Button
                     Content="选项"
-                    Click="OptionButton_Click"/>
+                    Click="ShowOptionsButton_Click"/>
             </StackPanel>
 
             <Line

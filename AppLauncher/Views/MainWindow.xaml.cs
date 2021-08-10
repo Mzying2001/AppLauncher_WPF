@@ -43,14 +43,13 @@ namespace AppLauncher.Views
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            if (WindowState == WindowState.Minimized)
-                WindowState = WindowState.Normal;
+            WindowState = WindowState.Normal;
             StaticData.Config.MainWindowInfo = WindowInfo.GetWindowInfo(this);
             StaticData.Config.AppListListBoxSelectedIndex = AppListListBox.SelectedIndex;
             base.OnClosing(e);
         }
 
-        private void OptionButton_Click(object sender, RoutedEventArgs e)
+        private void ShowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
             var menu = (ContextMenu)Resources["OptionsMenu"];
             menu.PlacementTarget = sender as UIElement;

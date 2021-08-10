@@ -11,15 +11,12 @@ namespace AppLauncher.Models
         public double Width { get; set; }
         public double Height { get; set; }
 
-        public System.Windows.WindowState WindowState { get; set; }
-
         public void ApplyWindowInfo(System.Windows.Window window)
         {
             window.Left = Left;
             window.Top = Top;
             window.Width = Width;
             window.Height = Height;
-            window.WindowState = WindowState;
         }
 
         public static WindowInfo GetWindowInfo(System.Windows.Window window)
@@ -29,8 +26,7 @@ namespace AppLauncher.Models
                 Left = window.Left,
                 Top = window.Top,
                 Width = window.Width,
-                Height = window.Height,
-                WindowState = window.WindowState
+                Height = window.Height
             };
         }
     }
