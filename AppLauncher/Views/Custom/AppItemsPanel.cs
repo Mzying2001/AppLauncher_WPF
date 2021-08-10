@@ -40,16 +40,35 @@ namespace AppLauncher.Views.Custom
             }
 
             var zeroPoint = new Point(0, 0);
+            var points = new Point[list.Count];
+            var onlyOneItemEachRow = true;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                points[i] = list[i].TranslatePoint(zeroPoint, this);
+                if (onlyOneItemEachRow && i > 0 && points[i - 1].Y == points[i].Y)
+                    onlyOneItemEachRow = false;
+            }
+
+            if (onlyOneItemEachRow)
+            {
+                foreach (var item in list)
+                {
+                    item.Width = ActualWidth;
+                    item.UpdateLayout();
+                }
+                return;
+            }
+
             for (int i = 0; i < list.Count - 1; i++)
             {
-                var childPoint = list[i].TranslatePoint(zeroPoint, this);
-                var nextPoint = list[i + 1].TranslatePoint(zeroPoint, this);
-                if (nextPoint.X < childPoint.X)
+                var childPoint = points[i];
+                if (points[i + 1].X < childPoint.X)
                 {
-                    var line = list.Where(item => item.TranslatePoint(zeroPoint, this).Y == childPoint.Y).ToList();
+                    var row = list.Where(item => item.TranslatePoint(zeroPoint, this).Y == childPoint.Y).ToList();
                     var surplusWidth = ActualWidth - childPoint.X - list[i].Margin.Right - list[i].ActualWidth;
-                    var averageAddWidth = surplusWidth / line.Count;
-                    foreach (var item in line)
+                    var averageAddWidth = surplusWidth / row.Count;
+                    foreach (var item in row)
                     {
                         item.Width = item.ActualWidth + averageAddWidth;
                         item.UpdateLayout();
