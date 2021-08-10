@@ -104,8 +104,11 @@ namespace AppLauncher.ViewModels
             var info = Executer.ShellExecute(IntPtr.Zero, "open", path, string.Empty,
                 PathHelper.GetLocatedFolderPath(path), Executer.ShowCommands.SW_SHOWNORMAL);
 
-            if ((int)info < 32 && ShowOpenErrorMsg)
-                MsgBoxHelper.ShowError($"启动时发生错误：{Executer.GetErrorStr(info)}");
+            if ((int)info < 32)
+            {
+                if (ShowOpenErrorMsg)
+                    MsgBoxHelper.ShowError($"启动时发生错误：{Executer.GetErrorStr(info)}");
+            }
             else
             {
                 if (MinimizeWindowAfterOpening)
