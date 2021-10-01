@@ -1,34 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using SimpleMvvm;
 
 namespace AppLauncher.Models
 {
-    public class AppItem : INotifyPropertyChanged
+    public class AppItem : NotificationObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private string _appName;
         public string AppName
         {
             get => _appName;
-            set
-            {
-                _appName = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AppName"));
-            }
+            set => UpdateValue(ref _appName, value);
         }
 
         private string _appPath;
         public string AppPath
         {
             get => _appPath;
-            set
-            {
-                _appPath = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AppPath"));
-            }
+            set => UpdateValue(ref _appPath, value);
         }
     }
 }

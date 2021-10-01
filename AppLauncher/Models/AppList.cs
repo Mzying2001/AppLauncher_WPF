@@ -1,35 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SimpleMvvm;
+using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text;
 
 namespace AppLauncher.Models
 {
-    public class AppList : INotifyPropertyChanged
+    public class AppList : NotificationObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private ObservableCollection<AppItem> _appItems;
         public ObservableCollection<AppItem> AppItems
         {
             get => _appItems;
-            set
-            {
-                _appItems = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AppItems"));
-            }
+            set => UpdateValue(ref _appItems, value);
         }
 
         private string _name;
         public string Name
         {
             get => _name;
-            set
-            {
-                _name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
-            }
+            set => UpdateValue(ref _name, value);
         }
 
         public void AddItem(string name, string path)

@@ -1,9 +1,8 @@
-﻿using AppLauncher.Commands;
-using AppLauncher.Models;
+﻿using AppLauncher.Models;
+using SimpleMvvm;
+using SimpleMvvm.Command;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows.Input;
 
 namespace AppLauncher.ViewModels
@@ -31,22 +30,14 @@ namespace AppLauncher.ViewModels
         public string Name
         {
             get => _name;
-            set
-            {
-                _name = value;
-                RaisePropertyChanged("Name");
-            }
+            set => UpdateValue(ref _name, value);
         }
 
         private string _path;
         public string Path
         {
             get => _path;
-            set
-            {
-                _path = value;
-                RaisePropertyChanged("Path");
-            }
+            set => UpdateValue(ref _path, value);
         }
 
         private void CloseWindow()
@@ -76,10 +67,12 @@ namespace AppLauncher.ViewModels
             CloseWindow();
         }
 
-        public EditAppItemWindowViewModel()
+        protected override void Init()
         {
-            CancelCommand = new DelegateCommand { Execute = Cancel };
-            OkCommand = new DelegateCommand { Execute = Ok };
+            base.Init();
+
+            CancelCommand = new DelegateCommand(Cancel);
+            OkCommand = new DelegateCommand(Ok);
         }
     }
 }

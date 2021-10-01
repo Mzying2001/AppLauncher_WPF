@@ -1,7 +1,6 @@
-﻿using AppLauncher.Commands;
+﻿using SimpleMvvm;
+using SimpleMvvm.Command;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace AppLauncher.ViewModels.DialogViewModels
@@ -37,8 +36,8 @@ namespace AppLauncher.ViewModels.DialogViewModels
 
         public InputTextDialogViewModel()
         {
-            CancelCommand = new DelegateCommand { Execute = Cancel };
-            OkCommand = new DelegateCommand<string> { Execute = Ok };
+            CancelCommand = new DelegateCommand(Cancel);
+            OkCommand = new DelegateCommand<string>(Ok);
         }
     }
 }

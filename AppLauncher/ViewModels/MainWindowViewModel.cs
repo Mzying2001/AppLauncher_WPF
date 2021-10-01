@@ -1,14 +1,11 @@
-﻿using AppLauncher.Commands;
-using AppLauncher.Models;
+﻿using AppLauncher.Models;
 using AppLauncher.Views;
-using AppLauncher.Views.Custom;
 using AppLauncher.Views.Dialogs;
 using Microsoft.Win32;
+using SimpleMvvm;
+using SimpleMvvm.Command;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -45,55 +42,35 @@ namespace AppLauncher.ViewModels
         public WindowState WindowState
         {
             get => _windowState;
-            set
-            {
-                _windowState = value;
-                RaisePropertyChanged("WindowState");
-            }
+            set => UpdateValue(ref _windowState, value);
         }
 
         private int _appListListBoxSelectedIndex;
         public int AppListListBoxSelectedIndex
         {
             get => _appListListBoxSelectedIndex;
-            set
-            {
-                _appListListBoxSelectedIndex = value;
-                RaisePropertyChanged("AppListListBoxSelectedIndex");
-            }
+            set => UpdateValue(ref _appListListBoxSelectedIndex, value);
         }
 
         private bool _windowTopmost;
         public bool WindowTopmost
         {
             get => _windowTopmost;
-            set
-            {
-                _windowTopmost = value;
-                RaisePropertyChanged("WindowTopmost");
-            }
+            set => UpdateValue(ref _windowTopmost, value);
         }
 
         private bool _minimizeWindowAfterOpening;
         public bool MinimizeWindowAfterOpening
         {
             get => _minimizeWindowAfterOpening;
-            set
-            {
-                _minimizeWindowAfterOpening = value;
-                RaisePropertyChanged("MinimizeWindowAfterOpening");
-            }
+            set => UpdateValue(ref _minimizeWindowAfterOpening, value);
         }
 
         private bool _showOpenErrorMsg;
         public bool ShowOpenErrorMsg
         {
             get => _showOpenErrorMsg;
-            set
-            {
-                _showOpenErrorMsg = value;
-                RaisePropertyChanged("ShowOpenErrorMsg");
-            }
+            set => UpdateValue(ref _showOpenErrorMsg, value);
         }
 
         private AppList CurrentSelectedAppList => StaticData.AppLists[AppListListBoxSelectedIndex];
@@ -354,48 +331,48 @@ namespace AppLauncher.ViewModels
             StaticData.Config.ShowOpenErrorMessage = ShowOpenErrorMsg;
         }
 
-        private void Init()
+        protected override void Init()
         {
-            var config = StaticData.Config;
+            base.Init();
 
+
+
+            var config = StaticData.Config;
             AppListListBoxSelectedIndex = config.AppListListBoxSelectedIndex;
             WindowTopmost = config.MainWindowTopmost;
             MinimizeWindowAfterOpening = config.MinimizeMainWindowAfterOpening;
             ShowOpenErrorMsg = config.ShowOpenErrorMessage;
-        }
 
-        public MainWindowViewModel()
-        {
-            Init();
 
-            OpenAppCommand = new DelegateCommand<AppItem> { Execute = OpenApp };
-            NewAppListCommand = new DelegateCommand { Execute = NewAppList };
-            RenameAppListCommand = new DelegateCommand<AppList> { Execute = RenameAppList };
-            RemoveAppListCommand = new DelegateCommand<AppList> { Execute = RemoveAppList };
-            ShowPreviousAppListCommand = new DelegateCommand { Execute = ShowPreviousAppList };
-            ShowNextAppListCommand = new DelegateCommand { Execute = ShowNextAppList };
-            AddAppCommand = new DelegateCommand { Execute = AddApp };
-            EditAppItemCommand = new DelegateCommand<AppItem> { Execute = EditAppItem };
-            RemoveAppItemCommand = new DelegateCommand<AppItem> { Execute = RemoveAppItem };
-            ShowAboutCommand = new DelegateCommand { Execute = ShowAbout };
-            RenameAppItemCommand = new DelegateCommand<AppItem> { Execute = RenameAppItem };
-            ViewSourceCommand = new DelegateCommand { Execute = ViewSource };
-            ShowInExplorerCommand = new DelegateCommand<AppItem> { Execute = ShowInExplorer };
-            ToggleWindowTopmostCommand = new DelegateCommand { Execute = ToggleWindowTopmost };
-            ToggleMinimizeWindowAfterOpeningCommand = new DelegateCommand { Execute = ToggleMinimizeWindowAfterOpening };
-            ToggleShowOpenErrorMsgCommand = new DelegateCommand { Execute = ToggleShowOpenErrorMsg };
 
-            AppItemListBoxOnDropCommand = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>
-            { Execute = AppItemListBoxOnDrop };
+            OpenAppCommand = new DelegateCommand<AppItem>(OpenApp);
+            NewAppListCommand = new DelegateCommand(NewAppList);
+            RenameAppListCommand = new DelegateCommand<AppList>(RenameAppList);
+            RemoveAppListCommand = new DelegateCommand<AppList>(RemoveAppList);
+            ShowPreviousAppListCommand = new DelegateCommand(ShowPreviousAppList);
+            ShowNextAppListCommand = new DelegateCommand(ShowNextAppList);
+            AddAppCommand = new DelegateCommand(AddApp);
+            EditAppItemCommand = new DelegateCommand<AppItem>(EditAppItem);
+            RemoveAppItemCommand = new DelegateCommand<AppItem>(RemoveAppItem);
+            ShowAboutCommand = new DelegateCommand(ShowAbout);
+            RenameAppItemCommand = new DelegateCommand<AppItem>(RenameAppItem);
+            ViewSourceCommand = new DelegateCommand(ViewSource);
+            ShowInExplorerCommand = new DelegateCommand<AppItem>(ShowInExplorer);
+            ToggleWindowTopmostCommand = new DelegateCommand(ToggleWindowTopmost);
+            ToggleMinimizeWindowAfterOpeningCommand = new DelegateCommand(ToggleMinimizeWindowAfterOpening);
+            ToggleShowOpenErrorMsgCommand = new DelegateCommand(ToggleShowOpenErrorMsg);
 
-            AppItemListBoxOnDragOverCommand = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>
-            { Execute = AppItemListBoxOnDragOver };
+            AppItemListBoxOnDropCommand
+                = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>(AppItemListBoxOnDrop);
 
-            AppListListBoxOnDragOverCommand = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>
-            { Execute = AppListListBoxOnDragOver };
+            AppItemListBoxOnDragOverCommand
+                = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>(AppItemListBoxOnDragOver);
 
-            AppListListBoxSelectionChangedCommand = new DelegateCommand<EventHandlerParamProxy<ListBox, SelectionChangedEventArgs>>
-            { Execute = AppListListBoxSelectionChanged };
+            AppListListBoxOnDragOverCommand
+                = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>(AppListListBoxOnDragOver);
+
+            AppListListBoxSelectionChangedCommand
+                = new DelegateCommand<EventHandlerParamProxy<ListBox, SelectionChangedEventArgs>>(AppListListBoxSelectionChanged);
         }
     }
 }
