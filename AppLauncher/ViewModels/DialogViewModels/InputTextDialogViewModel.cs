@@ -34,8 +34,10 @@ namespace AppLauncher.ViewModels.DialogViewModels
             }
         }
 
-        public InputTextDialogViewModel()
+        protected override void Init()
         {
+            base.Init();
+
             CancelCommand = new DelegateCommand(Cancel);
             OkCommand = new DelegateCommand<string>(Ok);
         }
