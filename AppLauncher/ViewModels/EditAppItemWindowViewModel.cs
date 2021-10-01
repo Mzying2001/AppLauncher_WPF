@@ -3,14 +3,13 @@ using SimpleMvvm;
 using SimpleMvvm.Command;
 using System;
 using System.IO;
-using System.Windows.Input;
 
 namespace AppLauncher.ViewModels
 {
     public class EditAppItemWindowViewModel : ViewModelBase
     {
-        public ICommand CancelCommand { get; set; }
-        public ICommand OkCommand { get; set; }
+        public DelegateCommand CancelCommand { get; set; }
+        public DelegateCommand OkCommand { get; set; }
 
         public Action CloseWindowAction { get; set; }
 

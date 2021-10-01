@@ -8,33 +8,32 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace AppLauncher.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public ICommand OpenAppCommand { get; set; }
-        public ICommand NewAppListCommand { get; set; }
-        public ICommand RenameAppListCommand { get; set; }
-        public ICommand RemoveAppListCommand { get; set; }
-        public ICommand ShowPreviousAppListCommand { get; set; }
-        public ICommand ShowNextAppListCommand { get; set; }
-        public ICommand AddAppCommand { get; set; }
-        public ICommand EditAppItemCommand { get; set; }
-        public ICommand RemoveAppItemCommand { get; set; }
-        public ICommand ShowAboutCommand { get; set; }
-        public ICommand AppItemListBoxOnDropCommand { get; set; }
-        public ICommand AppItemListBoxOnDragOverCommand { get; set; }
-        public ICommand AppListListBoxOnDragOverCommand { get; set; }
-        public ICommand AppListListBoxSelectionChangedCommand { get; set; }
-        public ICommand RenameAppItemCommand { get; set; }
-        public ICommand ViewSourceCommand { get; set; }
-        public ICommand ShowInExplorerCommand { get; set; }
-        public ICommand ToggleWindowTopmostCommand { get; set; }
-        public ICommand ToggleMinimizeWindowAfterOpeningCommand { get; set; }
-        public ICommand ToggleShowOpenErrorMsgCommand { get; set; }
+        public DelegateCommand OpenAppCommand { get; set; }
+        public DelegateCommand NewAppListCommand { get; set; }
+        public DelegateCommand RenameAppListCommand { get; set; }
+        public DelegateCommand RemoveAppListCommand { get; set; }
+        public DelegateCommand ShowPreviousAppListCommand { get; set; }
+        public DelegateCommand ShowNextAppListCommand { get; set; }
+        public DelegateCommand AddAppCommand { get; set; }
+        public DelegateCommand EditAppItemCommand { get; set; }
+        public DelegateCommand RemoveAppItemCommand { get; set; }
+        public DelegateCommand ShowAboutCommand { get; set; }
+        public DelegateCommand AppItemListBoxOnDropCommand { get; set; }
+        public DelegateCommand AppItemListBoxOnDragOverCommand { get; set; }
+        public DelegateCommand AppListListBoxOnDragOverCommand { get; set; }
+        public DelegateCommand AppListListBoxSelectionChangedCommand { get; set; }
+        public DelegateCommand RenameAppItemCommand { get; set; }
+        public DelegateCommand ViewSourceCommand { get; set; }
+        public DelegateCommand ShowInExplorerCommand { get; set; }
+        public DelegateCommand ToggleWindowTopmostCommand { get; set; }
+        public DelegateCommand ToggleMinimizeWindowAfterOpeningCommand { get; set; }
+        public DelegateCommand ToggleShowOpenErrorMsgCommand { get; set; }
 
         public Action UpdateAppItemLayoutAction { get; set; }
 
