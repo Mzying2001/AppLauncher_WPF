@@ -39,6 +39,9 @@ namespace AppLauncher.Views.Custom
                 item.UpdateLayout();
             }
 
+            if (list.Count == 1)
+                return;
+
             var zeroPoint = new Point(0, 0);
             var points = new Point[list.Count];
             var onlyOneItemEachRow = true;
