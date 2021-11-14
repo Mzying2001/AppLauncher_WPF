@@ -91,12 +91,14 @@
                 <TextBlock
                     Margin="0,0,0,5"
                     FontSize="18"
+                    TextTrimming="CharacterEllipsis"
                     Text="{Binding AppName, ElementName=Self, TargetNullValue=App名称}"
                     ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}"/>
 
                 <TextBlock
                     Foreground="Gray"
                     Margin="0,0,0,15"
+                    TextTrimming="CharacterEllipsis"
                     Text="{Binding Describe, ElementName=Self, TargetNullValue=App简述}"
                     ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}"/>
 
