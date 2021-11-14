@@ -3,7 +3,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ButtonStyles.xaml"/>
         <ResourceDictionary Source="ListBoxStyles.xaml"/>
-        <ResourceDictionary Source="AppItemListBoxStyle.xaml"/>
         <ResourceDictionary Source="TextBoxStyles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

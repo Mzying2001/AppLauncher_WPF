@@ -30,8 +30,6 @@ namespace AppLauncher.Views
         {
             InitializeComponent();
 
-            ViewModel.UpdateAppItemLayoutAction = () => AppItemsBox?.UpdateAppItemLayout();
-
             var vmProxy = (BindingProxy)Resources["VMProxy"];
             vmProxy.Data = ViewModel;
 

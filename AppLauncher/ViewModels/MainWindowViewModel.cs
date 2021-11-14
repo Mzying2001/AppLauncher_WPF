@@ -35,8 +35,6 @@ namespace AppLauncher.ViewModels
         public DelegateCommand ToggleMinimizeWindowAfterOpeningCommand { get; set; }
         public DelegateCommand ToggleShowOpenErrorMsgCommand { get; set; }
 
-        public Action UpdateAppItemLayoutAction { get; set; }
-
         private WindowState _windowState;
         public WindowState WindowState
         {
@@ -129,7 +127,6 @@ namespace AppLauncher.ViewModels
                 if (StaticData.AppLists.Count > 0)
                 {
                     AppListListBoxSelectedIndex = oldIndex == 0 ? 0 : oldIndex - 1;
-                    UpdateAppItemLayoutAction();
                 }
             }
         }
@@ -173,13 +170,11 @@ namespace AppLauncher.ViewModels
         private void EditAppItem(AppItem app)
         {
             new EditAppItemWindow { AppItem = app }.ShowDialog();
-            UpdateAppItemLayoutAction();
         }
 
         private void RemoveAppItem(AppItem app)
         {
             CurrentSelectedAppList.AppItems.Remove(app);
-            UpdateAppItemLayoutAction();
         }
 
         private void ShowAbout(object obj)
@@ -210,7 +205,6 @@ namespace AppLauncher.ViewModels
                         MsgBoxHelper.ShowError(e.Message);
                     }
                 }
-                UpdateAppItemLayoutAction();
             }
         }
 
@@ -241,7 +235,6 @@ namespace AppLauncher.ViewModels
                 int index = CurrentSelectedAppList.AppItems.IndexOf(targetApp);
                 CurrentSelectedAppList.AppItems.Remove(sourceApp);
                 CurrentSelectedAppList.AppItems.Insert(index, sourceApp);
-                UpdateAppItemLayoutAction();
             }
         }
 
@@ -278,7 +271,6 @@ namespace AppLauncher.ViewModels
 
         private void AppListListBoxSelectionChanged(EventHandlerParamProxy<ListBox, SelectionChangedEventArgs> proxy)
         {
-            UpdateAppItemLayoutAction?.Invoke();
         }
 
         private void RenameAppItem(AppItem app)
@@ -292,7 +284,6 @@ namespace AppLauncher.ViewModels
             if (!string.IsNullOrEmpty(newName))
             {
                 app.AppName = newName;
-                UpdateAppItemLayoutAction();
             }
         }
 

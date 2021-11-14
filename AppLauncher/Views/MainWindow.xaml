@@ -162,49 +162,64 @@
             </Custom:DragableListBox>
         </Grid>
 
-        <Custom:AppItemListBox
-            x:Name="AppItemsBox"
+        <Custom:DragableListBox
             Grid.Row="1"
-            Style="{StaticResource AppItemListBoxStyle}"
+            BorderThickness="0"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ItemsSource="{Binding ElementName=AppListListBox, Path=SelectedItem.AppItems}"
             OnDropCommand="{Binding AppItemListBoxOnDropCommand}"
             OnDragOverCommand="{Binding AppItemListBoxOnDragOverCommand}">
-            <ListBox.ItemTemplate>
-                <DataTemplate
-                    DataType="{x:Type Models:AppItem}">
-                    <UserControls:AppLauncherItem
-                        AppName="{Binding AppName}"
-                        Describe="{Binding AppPath, Converter={StaticResource Path2FileName}}"
-                        AppIconSource="{Binding AppPath, Converter={StaticResource Path2Icon}}"
-                        OpenCommand="{Binding Source={StaticResource VMProxy}, Path=Data.OpenAppCommand}"
-                        OpenCommandParameter="{Binding}"
-                        OnMouseDoubleClickCommand="{Binding Source={StaticResource VMProxy}, Path=Data.OpenAppCommand}"
-                        OnMouseDoubleClickCommandParameter="{Binding}">
-                        <UserControl.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem
-                                    Header="编辑"
-                                    Command="{Binding Source={StaticResource VMProxy}, Path=Data.EditAppItemCommand}"
-                                    CommandParameter="{Binding}"/>
-                                <MenuItem
-                                    Header="重命名"
-                                    Command="{Binding Source={StaticResource VMProxy}, Path=Data.RenameAppItemCommand}"
-                                    CommandParameter="{Binding}"/>
-                                <Separator/>
-                                <MenuItem
-                                    Header="打开文件所在位置"
-                                    Command="{Binding Source={StaticResource VMProxy}, Path=Data.ShowInExplorerCommand}"
-                                    CommandParameter="{Binding}"/>
-                                <Separator/>
-                                <MenuItem
-                                    Header="移除"
-                                    Command="{Binding Source={StaticResource VMProxy}, Path=Data.RemoveAppItemCommand}"
-                                    CommandParameter="{Binding}"/>
-                            </ContextMenu>
-                        </UserControl.ContextMenu>
-                    </UserControls:AppLauncherItem>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </Custom:AppItemListBox>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Custom:MyWrapPanel
+                        RowHeight="150"
+                        IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style
+                    TargetType="ListBoxItem">
+                    <Setter
+                        Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <UserControls:AppLauncherItem
+                                    Margin="10"
+                                    AppName="{Binding AppName}"
+                                    Describe="{Binding AppPath, Converter={StaticResource Path2FileName}}"
+                                    AppIconSource="{Binding AppPath, Converter={StaticResource Path2Icon}}"
+                                    OpenCommand="{Binding Source={StaticResource VMProxy}, Path=Data.OpenAppCommand}"
+                                    OpenCommandParameter="{Binding}"
+                                    OnMouseDoubleClickCommand="{Binding Source={StaticResource VMProxy}, Path=Data.OpenAppCommand}"
+                                    OnMouseDoubleClickCommandParameter="{Binding}">
+                                    <UserControl.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem
+                                                Header="编辑"
+                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.EditAppItemCommand}"
+                                                CommandParameter="{Binding}"/>
+                                            <MenuItem
+                                                Header="重命名"
+                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.RenameAppItemCommand}"
+                                                CommandParameter="{Binding}"/>
+                                            <Separator/>
+                                            <MenuItem
+                                                Header="打开文件所在位置"
+                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ShowInExplorerCommand}"
+                                                CommandParameter="{Binding}"/>
+                                            <Separator/>
+                                            <MenuItem
+                                                Header="移除"
+                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.RemoveAppItemCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        </ContextMenu>
+                                    </UserControl.ContextMenu>
+                                </UserControls:AppLauncherItem>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </Custom:DragableListBox>
     </Grid>
 </Window>
