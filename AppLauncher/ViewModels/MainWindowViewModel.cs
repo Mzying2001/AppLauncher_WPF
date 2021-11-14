@@ -174,7 +174,10 @@ namespace AppLauncher.ViewModels
 
         private void RemoveAppItem(AppItem app)
         {
-            CurrentSelectedAppList.AppItems.Remove(app);
+            if (MsgBoxHelper.ShowQuestion($"确定要删除“{app.AppName}”吗？") == MessageBoxResult.Yes)
+            {
+                CurrentSelectedAppList.AppItems.Remove(app);
+            }
         }
 
         private void ShowAbout(object obj)

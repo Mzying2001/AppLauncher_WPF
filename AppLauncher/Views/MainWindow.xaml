@@ -203,7 +203,7 @@
                                             <Separator/>
                                             <MenuItem
                                                 Header="移除"
-                                                Command="{Binding Source={StaticResource Locator}, Path=Data.RemoveAppItemCommand}"
+                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RemoveAppItemCommand}"
                                                 CommandParameter="{Binding}"/>
                                         </ContextMenu>
                                     </UserControl.ContextMenu>
