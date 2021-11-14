@@ -59,7 +59,7 @@ namespace AppLauncher.Views.Custom
                 rowItems.Enqueue(child);
             }
 
-            if (rowItems.Count == 1 && eachRowOnlyOneItem)
+            if (Children.Count != 1 && rowItems.Count == 1 && eachRowOnlyOneItem)
             {
                 rowItems.Dequeue().Arrange(new Rect(0, row * RowHeight, finalSize.Width, RowHeight));
             }
