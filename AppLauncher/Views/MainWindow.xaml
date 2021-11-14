@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:AppLauncher.Views"
     xmlns:Models="clr-namespace:AppLauncher.Models"
-    xmlns:ViewModels="clr-namespace:AppLauncher.ViewModels"
     xmlns:Custom="clr-namespace:AppLauncher.Views.Custom"
     xmlns:UserControls="clr-namespace:AppLauncher.Views.UserControls"
     mc:Ignorable="d"
@@ -16,17 +15,11 @@
     Height="450"
     MinWidth="300"
     MinHeight="300"
+    DataContext="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel}"
     Topmost="{Binding WindowTopmost}"
     WindowState="{Binding WindowState}">
 
-    <Window.DataContext>
-        <ViewModels:MainWindowViewModel/>
-    </Window.DataContext>
-
     <Window.Resources>
-        <local:BindingProxy
-            x:Key="VMProxy"/>
-
         <Style
             TargetType="Button"
             BasedOn="{StaticResource AppLauncherButtonBaseStyle}">
@@ -40,24 +33,24 @@
             Placement="Bottom">
             <MenuItem
                 Header="添加App"
-                Command="{Binding Source={StaticResource VMProxy}, Path=Data.AddAppCommand}"/>
+                Command="{Binding AddAppCommand}"/>
             <MenuItem
                 Header="创建新分类"
-                Command="{Binding Source={StaticResource VMProxy}, Path=Data.NewAppListCommand}"
+                Command="{Binding NewAppListCommand}"
                 InputGestureText="Ctrl+N"/>
             <Separator/>
             <MenuItem
                 Header="窗口顶置"
-                IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.WindowTopmost}"
-                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ToggleWindowTopmostCommand}"/>
+                IsChecked="{Binding WindowTopmost}"
+                Command="{Binding ToggleWindowTopmostCommand}"/>
             <MenuItem
                 Header="启动App后最小化窗口"
-                IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.MinimizeWindowAfterOpening}"
-                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ToggleMinimizeWindowAfterOpeningCommand}"/>
+                IsChecked="{Binding MinimizeWindowAfterOpening}"
+                Command="{Binding ToggleMinimizeWindowAfterOpeningCommand}"/>
             <MenuItem
                 Header="启动失败时显示错误信息"
-                IsChecked="{Binding Source={StaticResource VMProxy}, Path=Data.ShowOpenErrorMsg}"
-                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ToggleShowOpenErrorMsgCommand}"/>
+                IsChecked="{Binding ShowOpenErrorMsg}"
+                Command="{Binding ToggleShowOpenErrorMsgCommand}"/>
             <Separator/>
             <MenuItem
                 Header="查看源代码"
@@ -65,7 +58,7 @@
             <Separator/>
             <MenuItem
                 Header="关于"
-                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ShowAboutCommand}"/>
+                Command="{Binding ShowAboutCommand}"/>
         </ContextMenu>
     </Window.Resources>
 
@@ -147,12 +140,12 @@
                                 <ContextMenu>
                                     <MenuItem
                                         Header="重命名"
-                                        Command="{Binding Source={StaticResource VMProxy}, Path=Data.RenameAppListCommand}"
+                                        Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RenameAppListCommand}"
                                         CommandParameter="{Binding}"/>
                                     <Separator/>
                                     <MenuItem
                                         Header="删除"
-                                        Command="{Binding Source={StaticResource VMProxy}, Path=Data.RemoveAppListCommand}"
+                                        Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RemoveAppListCommand}"
                                         CommandParameter="{Binding}"/>
                                 </ContextMenu>
                             </Setter.Value>
@@ -188,29 +181,29 @@
                                     AppName="{Binding AppName}"
                                     Describe="{Binding AppPath, Converter={StaticResource Path2FileName}}"
                                     AppIconSource="{Binding AppPath, Converter={StaticResource Path2Icon}}"
-                                    OpenCommand="{Binding Source={StaticResource VMProxy}, Path=Data.OpenAppCommand}"
+                                    OpenCommand="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.OpenAppCommand}"
                                     OpenCommandParameter="{Binding}"
-                                    OnMouseDoubleClickCommand="{Binding Source={StaticResource VMProxy}, Path=Data.OpenAppCommand}"
+                                    OnMouseDoubleClickCommand="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.OpenAppCommand}"
                                     OnMouseDoubleClickCommandParameter="{Binding}">
                                     <UserControl.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem
                                                 Header="编辑"
-                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.EditAppItemCommand}"
+                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.EditAppItemCommand}"
                                                 CommandParameter="{Binding}"/>
                                             <MenuItem
                                                 Header="重命名"
-                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.RenameAppItemCommand}"
+                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RenameAppItemCommand}"
                                                 CommandParameter="{Binding}"/>
                                             <Separator/>
                                             <MenuItem
                                                 Header="打开文件所在位置"
-                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.ShowInExplorerCommand}"
+                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.ShowInExplorerCommand}"
                                                 CommandParameter="{Binding}"/>
                                             <Separator/>
                                             <MenuItem
                                                 Header="移除"
-                                                Command="{Binding Source={StaticResource VMProxy}, Path=Data.RemoveAppItemCommand}"
+                                                Command="{Binding Source={StaticResource Locator}, Path=Data.RemoveAppItemCommand}"
                                                 CommandParameter="{Binding}"/>
                                         </ContextMenu>
                                     </UserControl.ContextMenu>

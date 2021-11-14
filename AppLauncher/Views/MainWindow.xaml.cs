@@ -24,14 +24,9 @@ namespace AppLauncher.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext;
-
         public MainWindow()
         {
             InitializeComponent();
-
-            var vmProxy = (BindingProxy)Resources["VMProxy"];
-            vmProxy.Data = ViewModel;
 
             if (StaticData.Config.MainWindowInfo != null)
                 StaticData.Config.MainWindowInfo.ApplyWindowInfo(this);
