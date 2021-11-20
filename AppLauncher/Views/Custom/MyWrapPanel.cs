@@ -7,7 +7,19 @@ namespace AppLauncher.Views.Custom
 {
     public class MyWrapPanel : Panel
     {
-        public double RowHeight { get; set; }
+
+
+        public double RowHeight
+        {
+            get { return (double)GetValue(RowHeightProperty); }
+            set { SetValue(RowHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RowHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowHeightProperty =
+            DependencyProperty.Register("RowHeight", typeof(double), typeof(MyWrapPanel), new PropertyMetadata(100d));
+
+
 
         protected override Size MeasureOverride(Size availableSize)
         {
