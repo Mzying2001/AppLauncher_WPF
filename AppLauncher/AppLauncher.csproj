@@ -12,6 +12,7 @@
     <Authors>Mzying2001</Authors>
     <Company>Mzying2001</Company>
     <PackageId>AppLauncher</PackageId>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
