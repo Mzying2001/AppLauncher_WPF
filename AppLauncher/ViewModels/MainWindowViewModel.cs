@@ -93,29 +93,18 @@ namespace AppLauncher.ViewModels
 
         private void NewAppList(object obj)
         {
-            var name = new InputTextDialog
-            {
-                Title = "新分类",
-                Message = "请输入新分类的名称：",
-                Text = "新分类"
-            }.ShowDialog();
-            if (!string.IsNullOrEmpty(name))
+            InputTextDialog.ShowDialog(name =>
             {
                 StaticData.AddAppList(name);
                 AppListListBoxSelectedIndex = StaticData.AppLists.Count - 1;
-            }
+            }, "新分类", "请输入新分类的名称：", "新分类");
         }
 
         private void RenameAppList(AppList appList)
         {
-            var newName = new InputTextDialog
-            {
-                Title = $"重命名“{appList.Name}”",
-                Message = "请输入新名称：",
-                Text = appList.Name
-            }.ShowDialog();
-            if (!string.IsNullOrEmpty(newName))
-                appList.Name = newName;
+
+            InputTextDialog.ShowDialog(newName => appList.Name = newName,
+                $"重命名“{appList.Name}”", "请输入新名称：", appList.Name);
         }
 
         private void RemoveAppList(AppList appList)
@@ -279,16 +268,8 @@ namespace AppLauncher.ViewModels
 
         private void RenameAppItem(AppItem app)
         {
-            var newName = new InputTextDialog
-            {
-                Title = $"重命名“{app.AppName}”",
-                Message = "请输入新名称：",
-                Text = app.AppName
-            }.ShowDialog();
-            if (!string.IsNullOrEmpty(newName))
-            {
-                app.AppName = newName;
-            }
+            InputTextDialog.ShowDialog(newName => app.AppName = newName,
+                $"重命名“{app.AppName}”", "请输入新名称：", app.AppName);
         }
 
         private void ViewSource(object obj)

@@ -1,4 +1,4 @@
-﻿using AppLauncher.ViewModels.DialogViewModels;
+﻿using AppLauncher.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +19,7 @@ namespace AppLauncher.Views.Dialogs
     /// </summary>
     public partial class InputTextDialog : Window
     {
+        private Action<string> _callback;
 
 
         public string Message
@@ -43,14 +44,9 @@ namespace AppLauncher.Views.Dialogs
             DependencyProperty.Register("Text", typeof(string), typeof(InputTextDialog), new PropertyMetadata(null));
 
 
-        public InputTextDialogViewModel ViewModel => (InputTextDialogViewModel)DataContext;
-
         public InputTextDialog()
         {
             InitializeComponent();
-
-            ViewModel.CloseWindowAction = Close;
-            ViewModel.ClearTextBoxAction = () => Text = string.Empty;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -59,17 +55,33 @@ namespace AppLauncher.Views.Dialogs
             tb.SelectAll();
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            base.OnClosing(e);
-            if (!ViewModel.Ok_Invoked)
-                Text = string.Empty;
+            if (string.IsNullOrWhiteSpace(Text))
+            {
+                MsgBoxHelper.ShowMessage("请输入文本。");
+            }
+            else
+            {
+                _callback?.Invoke(Text);
+                Close();
+            }
         }
 
-        public new string ShowDialog()
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            base.ShowDialog();
-            return string.IsNullOrEmpty(Text) ? null : Text;
+            Close();
+        }
+
+        public static void ShowDialog(Action<string> callback, string title = null, string message = null, string defaultText = null)
+        {
+            new InputTextDialog
+            {
+                Text = defaultText,
+                Title = title,
+                Message = message,
+                _callback = callback,
+            }.ShowDialog();
         }
     }
 }

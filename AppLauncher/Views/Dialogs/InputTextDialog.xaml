@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppLauncher.Views.Dialogs"
         xmlns:Customs="clr-namespace:AppLauncher.Views.Custom"
-        xmlns:DialogViewModels="clr-namespace:AppLauncher.ViewModels.DialogViewModels"
         mc:Ignorable="d"
         
         x:Name="Self"
@@ -16,10 +15,6 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded">
-
-    <Window.DataContext>
-        <DialogViewModels:InputTextDialogViewModel/>
-    </Window.DataContext>
 
     <Window.Resources>
         <Style
@@ -44,9 +39,9 @@
         </Style>
     </Window.Resources>
 
-    <Window.InputBindings>
+    <!--<Window.InputBindings>
         <KeyBinding Key="Esc" Command="{Binding CancelCommand}"/>
-    </Window.InputBindings>
+    </Window.InputBindings>-->
 
     <StackPanel
         Margin="10">
@@ -58,12 +53,12 @@
         <Customs:AutoSelectAllTextBox
             x:Name="tb"
             Text="{Binding ElementName=Self, Path=Text, UpdateSourceTrigger=PropertyChanged}">
-            <TextBox.InputBindings>
+            <!--<TextBox.InputBindings>
                 <KeyBinding
                     Key="Enter"
                     Command="{Binding OkCommand}"
                     CommandParameter="{Binding ElementName=Self, Path=Text}"/>
-            </TextBox.InputBindings>
+            </TextBox.InputBindings>-->
         </Customs:AutoSelectAllTextBox>
 
         <StackPanel
@@ -71,13 +66,12 @@
             HorizontalAlignment="Center">
             <Button
                 Margin="5"
-                Content="取消"
-                Command="{Binding CancelCommand}"/>
+                Content="确定"
+                Click="OkButton_Click"/>
             <Button
                 Margin="5,5,0,5"
-                Content="确定"
-                Command="{Binding OkCommand}"
-                CommandParameter="{Binding ElementName=Self, Path=Text}"/>
+                Content="取消"
+                Click="CancelButton_Click"/>
         </StackPanel>
     </StackPanel>
 </Window>
