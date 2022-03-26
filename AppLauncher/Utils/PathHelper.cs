@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AppLauncher.Models
+namespace AppLauncher.Utils
 {
     public static class PathHelper
     {

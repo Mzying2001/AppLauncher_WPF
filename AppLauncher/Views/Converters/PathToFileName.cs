@@ -9,7 +9,7 @@ namespace AppLauncher.Views.Converters
     {
         public override string Convert(string value, object parameter, CultureInfo culture)
         {
-            return Models.PathHelper.GetFileName(value);
+            return Utils.PathHelper.GetFileName(value);
         }
 
         public override string ConvertBack(string value, object parameter, CultureInfo culture)

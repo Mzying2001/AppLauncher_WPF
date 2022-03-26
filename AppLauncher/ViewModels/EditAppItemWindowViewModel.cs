@@ -1,4 +1,5 @@
 ﻿using AppLauncher.Models;
+using AppLauncher.Utils;
 using SimpleMvvm;
 using SimpleMvvm.Command;
 using System;

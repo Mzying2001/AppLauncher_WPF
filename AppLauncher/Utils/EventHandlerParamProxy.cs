@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AppLauncher.Models
+namespace AppLauncher.Utils
 {
     public class EventHandlerParamProxy<SenderType, EventArgsType> where SenderType : class where EventArgsType : EventArgs
     {

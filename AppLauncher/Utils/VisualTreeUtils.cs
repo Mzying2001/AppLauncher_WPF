@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Media;
 
-namespace AppLauncher.Models
+namespace AppLauncher.Utils
 {
     public static class VisualTreeUtils
     {

@@ -1,4 +1,5 @@
 ﻿using AppLauncher.Models;
+using AppLauncher.Utils;
 using AppLauncher.Views;
 using AppLauncher.Views.Dialogs;
 using Microsoft.Win32;

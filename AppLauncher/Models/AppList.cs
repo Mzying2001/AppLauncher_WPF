@@ -1,4 +1,5 @@
-﻿using SimpleMvvm;
+﻿using AppLauncher.Utils;
+using SimpleMvvm;
 using System;
 using System.Collections.ObjectModel;
 
