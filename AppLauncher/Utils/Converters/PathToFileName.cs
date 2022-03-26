@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace AppLauncher.Views.Converters
+namespace AppLauncher.Utils.Converters
 {
     public class PathToFileName : ConverterBase<string, string>
     {

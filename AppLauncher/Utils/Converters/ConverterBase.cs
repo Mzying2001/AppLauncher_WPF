@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Data;
 
-namespace AppLauncher.Views.Converters
+namespace AppLauncher.Utils.Converters
 {
     public abstract class ConverterBase<SourceType, TargetType> : IValueConverter
     {

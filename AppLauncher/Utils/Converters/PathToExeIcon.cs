@@ -6,7 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace AppLauncher.Views.Converters
+namespace AppLauncher.Utils.Converters
 {
     public class PathToExeIcon : ConverterBase<string, ImageSource>
     {

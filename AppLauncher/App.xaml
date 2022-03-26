@@ -11,7 +11,7 @@
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/Styles/Global.xaml"/>
-                <ResourceDictionary Source="Views/Converters/Global.xaml"/>
+                <ResourceDictionary Source="Utils/Converters/Global.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>
