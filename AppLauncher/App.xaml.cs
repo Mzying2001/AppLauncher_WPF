@@ -18,46 +18,28 @@ namespace AppLauncher
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var currentProcess = Process.GetCurrentProcess();
-            var list = (from p
-                        in Process.GetProcesses()
-                        where p.ProcessName == currentProcess.ProcessName &&
-                              p.Id != currentProcess.Id &&
-                              p.MainModule.FileName.ToString() == currentProcess.MainModule.FileName.ToString()
-                        select p).ToList();
-
-            foreach (var p in list)
+            if (GetStartedProcess() is Process p)
             {
-                if (p.HasExited)
-                    continue;
-
-                bool flag;
-
-                flag = p.CloseMainWindow();
-                if (!flag)
-                {
-                    MsgBoxHelper.ShowError($"无法关闭线程（id：{p.Id}）。");
-                    Shutdown();
-                    return;
-                }
-
-                flag = p.WaitForExit(500);
-                if (!flag)
-                {
-                    MsgBoxHelper.ShowError($"等待线程关闭超时（id：{p.Id}）。");
-                    Shutdown();
-                    return;
-                }
+                WinApi.SendMessage(p.MainWindowHandle, 0x0400, default, default);
+                Environment.Exit(0);
             }
-
-            base.OnStartup(e);
-            StaticData.InitStaticData();
+            else
+            {
+                base.OnStartup(e);
+                StaticData.InitStaticData();
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
             StaticData.SaveStaticData();
+        }
+
+        private static Process GetStartedProcess()
+        {
+            Process cur = Process.GetCurrentProcess();
+            return (from p in Process.GetProcesses() where p.ProcessName == cur.ProcessName && p.Id != cur.Id select p).SingleOrDefault();
         }
     }
 }

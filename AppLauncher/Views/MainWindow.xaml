@@ -16,7 +16,8 @@
     MinHeight="300"
     DataContext="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel}"
     Topmost="{Binding WindowTopmost}"
-    WindowState="{Binding WindowState}">
+    WindowState="{Binding WindowState}"
+    SourceInitialized="Window_SourceInitialized">
 
     <Window.Resources>
         <Style
