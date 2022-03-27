@@ -25,8 +25,8 @@ namespace AppLauncher.ViewModels
         public DelegateCommand EditAppItemCommand { get; set; }
         public DelegateCommand RemoveAppItemCommand { get; set; }
         public DelegateCommand ShowAboutCommand { get; set; }
-        public DelegateCommand AppItemListBoxOnDropCommand { get; set; }
-        public DelegateCommand AppItemListBoxOnDragOverCommand { get; set; }
+        public DelegateCommand AppItemItemsControlOnDropCommand { get; set; }
+        public DelegateCommand AppItemItemsControlOnDragOverCommand { get; set; }
         public DelegateCommand AppListListBoxOnDragOverCommand { get; set; }
         public DelegateCommand AppListListBoxSelectionChangedCommand { get; set; }
         public DelegateCommand RenameAppItemCommand { get; set; }
@@ -177,7 +177,7 @@ namespace AppLauncher.ViewModels
                 $"{assemblyName.Name} v{assemblyName.Version} | by Mzying2001", "关于");
         }
 
-        private void AppItemListBoxOnDrop(EventHandlerParamProxy<ListBox, DragEventArgs> proxy)
+        private void AppItemListBoxOnDrop(EventHandlerParamProxy<ItemsControl, DragEventArgs> proxy)
         {
             if (StaticData.AppLists.Count == 0)
                 NewAppList(null);
@@ -201,17 +201,17 @@ namespace AppLauncher.ViewModels
             }
         }
 
-        private void AppItemListBoxOnDragOver(EventHandlerParamProxy<ListBox, DragEventArgs> proxy)
+        private void AppItemListBoxOnDragOver(EventHandlerParamProxy<ItemsControl, DragEventArgs> proxy)
         {
-            var listbox = proxy.Sender;
+            var itemsControl = proxy.Sender;
             var args = proxy.EventArgs;
 
-            var pos = args.GetPosition(listbox);
-            var res = VisualTreeHelper.HitTest(listbox, pos);
+            var pos = args.GetPosition(itemsControl);
+            var res = VisualTreeHelper.HitTest(itemsControl, pos);
             if (res == null)
                 return;
 
-            var item = VisualTreeUtils.FindParent<ListBoxItem>(res.VisualHit);
+            var item = res.VisualHit as FrameworkElement;
             if (item == null)
                 return;
 
@@ -337,11 +337,11 @@ namespace AppLauncher.ViewModels
             ToggleMinimizeWindowAfterOpeningCommand = new DelegateCommand(ToggleMinimizeWindowAfterOpening);
             ToggleShowOpenErrorMsgCommand = new DelegateCommand(ToggleShowOpenErrorMsg);
 
-            AppItemListBoxOnDropCommand
-                = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>(AppItemListBoxOnDrop);
+            AppItemItemsControlOnDropCommand
+                = new DelegateCommand<EventHandlerParamProxy<ItemsControl, DragEventArgs>>(AppItemListBoxOnDrop);
 
-            AppItemListBoxOnDragOverCommand
-                = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>(AppItemListBoxOnDragOver);
+            AppItemItemsControlOnDragOverCommand
+                = new DelegateCommand<EventHandlerParamProxy<ItemsControl, DragEventArgs>>(AppItemListBoxOnDragOver);
 
             AppListListBoxOnDragOverCommand
                 = new DelegateCommand<EventHandlerParamProxy<ListBox, DragEventArgs>>(AppListListBoxOnDragOver);

@@ -155,158 +155,154 @@
             </Custom:DragableListBox>
         </Grid>
 
-        <Custom:DragableListBox
-            Grid.Row="1"
-            BorderThickness="0"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ItemsSource="{Binding ElementName=AppListListBox, Path=SelectedItem.AppItems}"
-            OnDropCommand="{Binding AppItemListBoxOnDropCommand}"
-            OnDragOverCommand="{Binding AppItemListBoxOnDragOverCommand}">
-            <ListBox.Resources>
-                <Style
-                    TargetType="ListBoxItem">
-                    <Setter
-                        Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate
-                                TargetType="ListBoxItem">
-                                <Border
-                                    Margin="10"
-                                    CornerRadius="5"
-                                    BorderThickness="0.5"
-                                    BorderBrush="LightGray"
-                                    Background="White">
+        <Grid
+            Grid.Row="1">
+            <ScrollViewer
+                VerticalScrollBarVisibility="Auto">
+                <Custom:DragableItemsControl
+                    ItemsSource="{Binding ElementName=AppListListBox, Path=SelectedItem.AppItems}"
+                    OnDropCommand="{Binding AppItemItemsControlOnDropCommand}"
+                    OnDragOverCommand="{Binding AppItemItemsControlOnDragOverCommand}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Custom:MyWrapPanel
+                                RowHeight="150"
+                                IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate
+                            DataType="{x:Type Models:AppItem}">
+                            <Border
+                                Margin="10"
+                                CornerRadius="5"
+                                BorderThickness="0.5"
+                                BorderBrush="LightGray"
+                                Background="White">
 
-                                    <Border.Effect>
-                                        <DropShadowEffect
-                                            x:Name="dse"
-                                            Opacity="0.1"
-                                            BlurRadius="10"/>
-                                    </Border.Effect>
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        x:Name="dse"
+                                        Opacity="0.1"
+                                        BlurRadius="10"/>
+                                </Border.Effect>
 
-                                    <Border.Triggers>
-                                        <EventTrigger
-                                            RoutedEvent="MouseEnter">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation
-                                                        To="0.3"
-                                                        Duration="0:0:0:0.25"
-                                                        Storyboard.TargetName="dse"
-                                                        Storyboard.TargetProperty="(DropShadowEffect.Opacity)"/>
-                                                    <DoubleAnimation
-                                                        To="20"
-                                                        Duration="0:0:0:0.25"
-                                                        Storyboard.TargetName="dse"
-                                                        Storyboard.TargetProperty="(DropShadowEffect.BlurRadius)"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                        <EventTrigger
-                                            RoutedEvent="MouseLeave">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation
-                                                        To="0.1"
-                                                        Duration="0:0:0:0.25"
-                                                        Storyboard.TargetName="dse"
-                                                        Storyboard.TargetProperty="(DropShadowEffect.Opacity)"/>
-                                                    <DoubleAnimation
-                                                        To="10"
-                                                        Duration="0:0:0:0.25"
-                                                        Storyboard.TargetName="dse"
-                                                        Storyboard.TargetProperty="(DropShadowEffect.BlurRadius)"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Border.Triggers>
+                                <Border.Triggers>
+                                    <EventTrigger
+                                        RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    To="0.3"
+                                                    Duration="0:0:0:0.25"
+                                                    Storyboard.TargetName="dse"
+                                                    Storyboard.TargetProperty="(DropShadowEffect.Opacity)"/>
+                                                <DoubleAnimation
+                                                    To="20"
+                                                    Duration="0:0:0:0.25"
+                                                    Storyboard.TargetName="dse"
+                                                    Storyboard.TargetProperty="(DropShadowEffect.BlurRadius)"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger
+                                        RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    To="0.1"
+                                                    Duration="0:0:0:0.25"
+                                                    Storyboard.TargetName="dse"
+                                                    Storyboard.TargetProperty="(DropShadowEffect.Opacity)"/>
+                                                <DoubleAnimation
+                                                    To="10"
+                                                    Duration="0:0:0:0.25"
+                                                    Storyboard.TargetName="dse"
+                                                    Storyboard.TargetProperty="(DropShadowEffect.BlurRadius)"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
 
-                                    <Border.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem
-                                                Header="编辑"
-                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.EditAppItemCommand}"
-                                                CommandParameter="{Binding}"/>
-                                            <MenuItem
-                                                Header="重命名"
-                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RenameAppItemCommand}"
-                                                CommandParameter="{Binding}"/>
-                                            <Separator/>
-                                            <MenuItem
-                                                Header="打开文件所在位置"
-                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.ShowInExplorerCommand}"
-                                                CommandParameter="{Binding}"/>
-                                            <Separator/>
-                                            <MenuItem
-                                                Header="移除"
-                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RemoveAppItemCommand}"
-                                                CommandParameter="{Binding}"/>
-                                        </ContextMenu>
-                                    </Border.ContextMenu>
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem
+                                            Header="编辑"
+                                            Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.EditAppItemCommand}"
+                                            CommandParameter="{Binding}"/>
+                                        <MenuItem
+                                            Header="重命名"
+                                            Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RenameAppItemCommand}"
+                                            CommandParameter="{Binding}"/>
+                                        <Separator/>
+                                        <MenuItem
+                                            Header="打开文件所在位置"
+                                            Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.ShowInExplorerCommand}"
+                                            CommandParameter="{Binding}"/>
+                                        <Separator/>
+                                        <MenuItem
+                                            Header="移除"
+                                            Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.RemoveAppItemCommand}"
+                                            CommandParameter="{Binding}"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="*"/>
-                                        </Grid.RowDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                        <Image
-                                            Grid.Column="0"
-                                            Grid.Row="0"
-                                            Grid.RowSpan="3"
-                                            Margin="15,0"
-                                            Width="64"
-                                            Height="64"
-                                            Stretch="None"
-                                            Source="{Binding AppPath, Converter={StaticResource Path2Icon}}"/>
+                                    <Image
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
+                                        Margin="15,0"
+                                        Width="64"
+                                        Height="64"
+                                        Stretch="None"
+                                        Source="{Binding AppPath, Converter={StaticResource Path2Icon}}"/>
 
-                                        <StackPanel
-                                            Grid.Column="1"
-                                            Grid.Row="1"
-                                            Margin="0,0,15,0">
-                                            <TextBlock
-                                                Margin="0,0,0,5"
-                                                FontSize="18"
-                                                TextTrimming="CharacterEllipsis"
-                                                Text="{Binding AppName, TargetNullValue=App名称}"
-                                                ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}"/>
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        Grid.Row="1"
+                                        Margin="0,0,15,0">
+                                        <TextBlock
+                                            Margin="0,0,0,5"
+                                            FontSize="18"
+                                            TextTrimming="CharacterEllipsis"
+                                            Text="{Binding AppName, TargetNullValue=App名称}"
+                                            ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}"/>
 
-                                            <TextBlock
-                                                Foreground="Gray"
-                                                Margin="0,0,0,15"
-                                                TextTrimming="CharacterEllipsis"
-                                                Text="{Binding AppPath, Converter={StaticResource Path2FileName}, TargetNullValue=App简述}"
-                                                ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}"/>
+                                        <TextBlock
+                                            Foreground="Gray"
+                                            Margin="0,0,0,15"
+                                            TextTrimming="CharacterEllipsis"
+                                            Text="{Binding AppPath, Converter={StaticResource Path2FileName}, TargetNullValue=App简述}"
+                                            ToolTip="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}"/>
 
-                                            <Button 
-                                                Content="启动"
-                                                HorizontalAlignment="Left"
-                                                Height="25"
-                                                MinWidth="60"
-                                                Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.OpenAppCommand}"
-                                                CommandParameter="{Binding}"
-                                                Style="{DynamicResource AppLauncherButtonBaseStyle}"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.Resources>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Custom:MyWrapPanel
-                        RowHeight="150"
-                        IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </Custom:DragableListBox>
+                                        <Button
+                                            Content="启动"
+                                            HorizontalAlignment="Left"
+                                            Height="25"
+                                            MinWidth="60"
+                                            Command="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel.OpenAppCommand}"
+                                            CommandParameter="{Binding}"
+                                            Style="{DynamicResource AppLauncherButtonBaseStyle}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </Custom:DragableItemsControl>
+            </ScrollViewer>
+        </Grid>
+
     </Grid>
 </Window>
