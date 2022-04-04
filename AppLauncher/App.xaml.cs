@@ -1,12 +1,9 @@
 ﻿using AppLauncher.Models;
 using AppLauncher.Utils;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AppLauncher
@@ -39,7 +36,7 @@ namespace AppLauncher
         private static Process GetStartedProcess()
         {
             Process cur = Process.GetCurrentProcess();
-            return (from p in Process.GetProcesses() where p.ProcessName == cur.ProcessName && p.Id != cur.Id select p).SingleOrDefault();
+            return (from p in Process.GetProcesses() where p.ProcessName == cur.ProcessName && p.Id != cur.Id select p).FirstOrDefault();
         }
     }
 }
